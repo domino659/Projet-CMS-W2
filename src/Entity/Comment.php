@@ -3,16 +3,15 @@ spl_autoload_register(function ($className) {
     require $className . '.php';
 });
 
-class Article
+class Commentaire
 {
+    private Long $CommentID;
     private Long $ArticleID;
     private Long $AuthorID;
-    private string $Title;
     private string $Content;
     private DateTime $PostDate;
 
-    public function __construct(string $Titre, array $data = []){
-       $this->setTitle($Titre);
+    public function __construct(array $data = []){
        $this->hydrate($data);
     }
 
@@ -26,11 +25,11 @@ class Article
             }
     }
 
-    public function getArticleID(){
-        return $this->ArticleID;
+    public function getCommentID(){
+        return $this->CommentID;
     }
-    public function setArticleID(Long $ID){
-        $this->ArticleID = $ID;
+    public function setCommentID(Long $ID){
+        $this->CommentID = $ID;
         return $this
     }
 
@@ -42,11 +41,11 @@ class Article
         return $this
     }
 
-    public function getTitle(){
-        return $this->Title;
+    public function getArticleID(){
+        return $this->ArticleID;
     }
-    public function setTitle(str $Title){
-        $this->Title = $Title;
+    public function setArticleID(Long $ID){
+        $this->ArticleID = $ID;
         return $this
     }
 
@@ -59,11 +58,10 @@ class Article
     }
 
     public function getPostDate(){
-        return $this->Content;
+        return $this->PostDate;
     }
     public function setPostDate(DateTime $PostDate)){
         $this->PostDate = $PostDate;
         return $this
     }
 }
-
