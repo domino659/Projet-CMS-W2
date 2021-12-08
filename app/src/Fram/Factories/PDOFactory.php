@@ -17,4 +17,12 @@ class PDOFactory
              die('Erreur : ' . $e->getMessage());
          }
     }
+
+    public function request($requeteSql)
+    {
+        $query = $this->getMysqlConnection()->query($requeteSql);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $result;
+    }
 }

@@ -3,18 +3,27 @@
 namespace App\Manager;
 
 use App\Entity\Post;
+use App\Fram\Factories\PDOFactory;
 
 class PostManager extends BaseManager
 {
 
-
     /**
      * @return Post[]
      */
+
     public function getAllPosts(): array
     {
-        // TODO -  Get all posts
-        return [];
+        $allPost = [];
+        $requeteSql = "SELECT * FROM post";
+        $connexion = new PDOFactory();
+        $result = $connexion -> request($requeteSql);
+        foreach ($result as $posts){
+            $post = [$posts['id'], $posts['title'], $posts['content'], $posts['postDate'], $posts['authorId']];
+            array_push($allPost, new Post($post));
+        };
+
+        return $allPost;
     }
 
     public function getPostById(int $id): Post
