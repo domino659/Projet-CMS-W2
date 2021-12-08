@@ -15,52 +15,91 @@ class User
     }
 
     public function hydrate($data){
-        foreach($data as $key => $value){
-
-            $method = 'set' . ucfirst(key);
-
-            if(is_callable([$this, $method])){
+        foreach($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (is_callable([$this, $method])) {
                 $this->method($value);
             }
+        }
     }
 
-    public function getid(){
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
         return $this->id;
     }
-    public function setid(int $id){
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
         $this->id = $id;
-        return $this
     }
 
-    public function getUsername(){
+    /**
+     * @return str
+     */
+    public function getUsername(): str
+    {
         return $this->Username;
     }
-    public function setUsername(str $Username)){
+
+    /**
+     * @param str $Username
+     */
+    public function setUsername(str $Username): void
+    {
         $this->Username = $Username;
-        return $this
     }
 
-    public function getisAdmin(){
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
         return $this->isAdmin;
     }
-    public function setisAdmin(boolean $isAdmin)){
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin(bool $isAdmin): void
+    {
         $this->isAdmin = $isAdmin;
-        return $this
     }
 
-    public function getMail(){
-        return $this->Mail;
-    }
-    public function setUsername(str $Mail)){
-        $this->Mail = $Mail;
-        return $this
-    }
-
-    public function getPassword(){
+    /**
+     * @return str
+     */
+    public function getPassword(): str
+    {
         return $this->Password;
     }
-    public function setUsername(str $Password)){
+
+    /**
+     * @param str $Password
+     */
+    public function setPassword(str $Password): void
+    {
         $this->Password = $Password;
-        return $this
+    }
+
+    /**
+     * @return str
+     */
+    public function getMail(): str
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @param str $mail
+     */
+    public function setMail(str $mail): void
+    {
+        $this->mail = $mail;
     }
 }

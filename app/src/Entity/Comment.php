@@ -15,52 +15,91 @@ class Comment
     }
 
     public function hydrate($data){
-        foreach($data as $key => $value){
-
-            $method = 'set' . ucfirst(key);
-
-            if(is_callable([$this, $method])){
+        foreach($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (is_callable([$this, $method])) {
                 $this->method($value);
             }
+        }
     }
 
-    public function getid(){
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
         return $this->id;
     }
-    public function setCommentId(Long $id){
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
         $this->id = $id;
-        return $this
     }
 
-    public function getAuthorID(){
+    /**
+     * @return int
+     */
+    public function getPostId(): int
+    {
+        return $this->PostId;
+    }
+
+    /**
+     * @param int $PostId
+     */
+    public function setPostId(int $PostId): void
+    {
+        $this->PostId = $PostId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAuthorId(): int
+    {
         return $this->AuthorId;
     }
-    public function setAuthorID(int $id){
-        $this->AuthorId = $id;
-        return $this
+
+    /**
+     * @param int $AuthorId
+     */
+    public function setAuthorId(int $AuthorId): void
+    {
+        $this->AuthorId = $AuthorId;
     }
 
-    public function getPostID(){
-        return $this->PostID;
-    }
-    public function setPostID(int $id){
-        $this->PostId = $id;
-        return $this
-    }
-
-    public function getContent(){
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
         return $this->Content;
     }
-    public function setContent(str $Content)){
+
+    /**
+     * @param string $Content
+     */
+    public function setContent(string $Content): void
+    {
         $this->Content = $Content;
-        return $this
     }
 
-    public function getCommentDate(){
+    /**
+     * @return DateTime
+     */
+    public function getCommentDate(): DateTime
+    {
         return $this->CommentDate;
     }
-    public function setCommentDate(DateTime $CommentDate)){
+
+    /**
+     * @param DateTime $CommentDate
+     */
+    public function setCommentDate(DateTime $CommentDate): void
+    {
         $this->CommentDate = $CommentDate;
-        return $this
     }
 }

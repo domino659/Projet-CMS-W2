@@ -15,53 +15,92 @@ class Post
     }
 
     public function hydrate($data){
-        foreach($data as $key => $value){
-
-            $method = 'set' . ucfirst(key);
-
-            if(is_callable([$this, $method])){
+        foreach($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (is_callable([$this, $method])) {
                 $this->method($value);
             }
+        }
     }
 
-    public function getPostId(){
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
         return $this->id;
     }
-    public function setPostId(Long $id){
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
         $this->id = $id;
-        return $this
     }
 
-    public function getAuthorId(){
+    /**
+     * @return int
+     */
+    public function getAuthorId(): int
+    {
         return $this->AuthorId;
     }
-    public function setAuthorId(int $id){
-        $this->AuthorId = $id;
-        return $this
+
+    /**
+     * @param int $AuthorId
+     */
+    public function setAuthorId(int $AuthorId): void
+    {
+        $this->AuthorId = $AuthorId;
     }
 
-    public function getTitle(){
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
         return $this->Title;
     }
-    public function setTitle(str $Title){
+
+    /**
+     * @param string $Title
+     */
+    public function setTitle(string $Title): void
+    {
         $this->Title = $Title;
-        return $this
     }
 
-    public function getContent(){
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
         return $this->Content;
     }
-    public function setContent(str $Content)){
+
+    /**
+     * @param string $Content
+     */
+    public function setContent(string $Content): void
+    {
         $this->Content = $Content;
-        return $this
     }
 
-    public function getPostDate(){
-        return $this->Content;
+    /**
+     * @return DateTime
+     */
+    public function getPostDate(): DateTime
+    {
+        return $this->PostDate;
     }
-    public function setPostDate(DateTime $PostDate)){
+
+    /**
+     * @param DateTime $PostDate
+     */
+    public function setPostDate(DateTime $PostDate): void
+    {
         $this->PostDate = $PostDate;
-        return $this
     }
 }
 
