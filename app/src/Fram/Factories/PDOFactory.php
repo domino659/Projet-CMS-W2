@@ -6,7 +6,7 @@ class PDOFactory
 {
     public static function getMysqlConnection()
     {
-        return new PDO('mysql:host=db;dbname=Projet-CMS-W2', 'user', 'password');
+        return new PDO('mysql:host=db;dbname=ProjetCMSW2', 'user', 'password');
     }
 }
 
