@@ -10,6 +10,10 @@ class Comment
     private int $authorId;
     private int $postId;
 
+    public function __construct(array $data = []){
+        $this->hydrate($data);
+    }
+
     public function hydrate($data){
         foreach($data as $key => $value) {
             $method = 'set' . ucfirst($key);

@@ -14,16 +14,17 @@ class PostManager extends BaseManager
 
     public function getAllPosts(): array
     {
-        $allPost = [];
+        $allPosts = [];
         $requeteSql = "SELECT * FROM post";
         $connexion = new PDOFactory();
-        $result = $connexion -> request($requeteSql);
-        foreach ($result as $posts){
-            $post = [$posts['id'], $posts['title'], $posts['content'], $posts['postDate'], $posts['authorId']];
-            array_push($allPost, new Post($post));
-        };
-
-        return $allPost;
+        $sth = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $sth->execute();
+        $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        foreach ($results as $result){
+            $post = [$result['id'], $result['title'], $result['content'], $result['postDate'], $result['authorId']];
+            array_push($allPosts, new Post($post));
+        }
+        return $allPosts;
     }
 
     public function getPostById(int $id): Post

@@ -10,6 +10,10 @@ class Post
     private \DateTime $postDate;
     private int $authorId;
 
+    public function __construct(array $data = []){
+        $this->hydrate($data);
+    }
+
     public function hydrate($data){
         foreach($data as $key => $value) {
             $method = 'set' . ucfirst($key);
