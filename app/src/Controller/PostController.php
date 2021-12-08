@@ -14,13 +14,13 @@ class PostController extends BaseController
      */
     public function executeIndex()
     {
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPosts();
+        $PostManager = new PostManager(PDOFactory::getMysqlConnection());
+        $Posts = $PostManager->getAllPost();
 
         $this->render(
             'home.php',
             [
-                'posts' => $posts,
+                'Posts' => $Posts,
                 'user' => new Author(),
                 'test' => 'je suis un test'
             ],
@@ -36,7 +36,7 @@ class PostController extends BaseController
         $this->render(
             'show.php',
             [
-                'test' => 'article ' . $this->params['id']
+                'test' => 'Post ' . $this->params['id']
             ],
             'Show Page'
         );

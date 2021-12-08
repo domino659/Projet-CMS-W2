@@ -4,7 +4,7 @@ namespace App\Entity;
 
 class User
 {
-    private Long $id;
+    private int $id;
     private str $Username;
     private boolean $isAdmin;
     private str $Password;
@@ -27,7 +27,7 @@ class User
     public function getid(){
         return $this->id;
     }
-    public function setid(Long $id){
+    public function setid(int $id){
         $this->id = $id;
         return $this
     }

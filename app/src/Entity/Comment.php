@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-class Commentaire
+class Comment
 {
-    private Long $id;
-    private Long $ArticleID;
-    private Long $AuthorID;
+    private int $id;
+    private int $PostId;
+    private int $AuthorId;
     private string $Content;
-    private DateTime $PostDate;
+    private DateTime $CommentDate;
 
     public function __construct(array $data = []){
        $this->hydrate($data);
@@ -27,24 +27,24 @@ class Commentaire
     public function getid(){
         return $this->id;
     }
-    public function setCommentID(Long $id){
+    public function setCommentId(Long $id){
         $this->id = $id;
         return $this
     }
 
     public function getAuthorID(){
-        return $this->AuthorID;
+        return $this->AuthorId;
     }
-    public function setAuthorID(Long $ID){
-        $this->AuthorID = $ID;
+    public function setAuthorID(int $id){
+        $this->AuthorId = $id;
         return $this
     }
 
-    public function getArticleID(){
-        return $this->ArticleID;
+    public function getPostID(){
+        return $this->PostID;
     }
-    public function setArticleID(Long $ID){
-        $this->ArticleID = $ID;
+    public function setPostID(int $id){
+        $this->PostId = $id;
         return $this
     }
 
@@ -56,11 +56,11 @@ class Commentaire
         return $this
     }
 
-    public function getPostDate(){
-        return $this->PostDate;
+    public function getCommentDate(){
+        return $this->CommentDate;
     }
-    public function setPostDate(DateTime $PostDate)){
-        $this->PostDate = $PostDate;
+    public function setCommentDate(DateTime $CommentDate)){
+        $this->CommentDate = $CommentDate;
         return $this
     }
 }
