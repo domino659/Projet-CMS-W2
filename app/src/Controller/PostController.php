@@ -16,7 +16,6 @@ class PostController extends BaseController
     {
         $postManager = new PostManager(PDOFactory::getMysqlConnection());
         $posts = $postManager->getAllPosts();
-        var_dump($posts);
 
         $this->render(
             'home.php',

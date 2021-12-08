@@ -66,9 +66,9 @@ class Comment
     /**
      * @param \DateTime $commentDate
      */
-    public function setCommentDate(\DateTime $commentDate): void
+    public function setCommentDate(string $datetime): void
     {
-        $this->commentDate = $commentDate;
+        $this->commentDate = new \DateTime($datetime);
     }
 
     /**

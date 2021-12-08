@@ -10,7 +10,7 @@ class Post
     private \DateTime $postDate;
     private int $authorId;
 
-    public function __construct(array $data = []){
+    public function __construct(array $data){
         $this->hydrate($data);
     }
 
@@ -82,9 +82,9 @@ class Post
     /**
      * @param \DateTime $postDate
      */
-    public function setPostDate(\DateTime $postDate): void
+    public function setPostDate(string $datetime): void
     {
-        $this->postDate = $postDate;
+        $this->postDate = new \DateTime($datetime);
     }
 
     /**
