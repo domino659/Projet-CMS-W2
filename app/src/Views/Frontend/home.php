@@ -3,7 +3,7 @@
 <?php
 /**
  * @var $user \App\Entity\Author
- * @var $posts \App\Entity\Post[]
+ * @var $Posts \App\Entity\Post[]
  */
 
 

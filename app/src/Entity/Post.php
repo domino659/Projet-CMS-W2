@@ -2,16 +2,15 @@
 
 namespace App\Entity;
 
-class Article
+class Post
 {
-    private Long $id;
-    private Long $AuthorID;
+    private int $id;
+    private int $AuthorId;
     private string $Title;
     private string $Content;
     private DateTime $PostDate;
 
-    public function __construct(string $Titre, array $data = []){
-       $this->setTitle($Titre);
+    public function __construct(array $data = []){
        $this->hydrate($data);
     }
 
@@ -25,19 +24,19 @@ class Article
             }
     }
 
-    public function getArticleID(){
+    public function getPostId(){
         return $this->id;
     }
-    public function setArticleID(Long $ID){
+    public function setPostId(Long $id){
         $this->id = $id;
         return $this
     }
 
-    public function getAuthorID(){
-        return $this->AuthorID;
+    public function getAuthorId(){
+        return $this->AuthorId;
     }
-    public function setAuthorID(Long $ID){
-        $this->AuthorID = $ID;
+    public function setAuthorId(int $id){
+        $this->AuthorId = $id;
         return $this
     }
 
