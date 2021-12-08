@@ -1,11 +1,10 @@
 <?php
-spl_autoload_register(function ($className) {
-    require $className . '.php';
-});
+
+namespace App\Entity;
 
 class User
 {
-    private Long $UserID;
+    private Long $id;
     private str $Username;
     private boolean $isAdmin;
     private str $Password;
@@ -25,11 +24,11 @@ class User
             }
     }
 
-    public function getUserID(){
-        return $this->UserID;
+    public function getid(){
+        return $this->id;
     }
-    public function setUserID(Long $ID){
-        $this->UserID = $ID;
+    public function setid(Long $id){
+        $this->id = $id;
         return $this
     }
 

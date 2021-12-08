@@ -1,15 +1,11 @@
 <?php
 
-class CommentManager
+namespace App\Manager;
+
+use App\Entity\Comment;
+
+class CommentManager extends BaseManager
 {
-    private PDO $pdo;
-
-    public function __construct(PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
-
     public function getAllComment(){
 
     }
@@ -18,7 +14,15 @@ class CommentManager
 
     }
 
-    public function addComment(){
+    public function createComment(){
+
+    }
+
+    public function updateComment(){
+
+    }
+
+    public function deleteComment(){
 
     }
 

@@ -1,11 +1,10 @@
 <?php
-spl_autoload_register(function ($className) {
-    require $className . '.php';
-});
+
+namespace App\Entity;
 
 class Commentaire
 {
-    private Long $CommentID;
+    private Long $id;
     private Long $ArticleID;
     private Long $AuthorID;
     private string $Content;
@@ -25,11 +24,11 @@ class Commentaire
             }
     }
 
-    public function getCommentID(){
-        return $this->CommentID;
+    public function getid(){
+        return $this->id;
     }
-    public function setCommentID(Long $ID){
-        $this->CommentID = $ID;
+    public function setCommentID(Long $id){
+        $this->id = $id;
         return $this
     }
 

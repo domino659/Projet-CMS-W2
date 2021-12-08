@@ -1,11 +1,10 @@
 <?php
-spl_autoload_register(function ($className) {
-    require $className . '.php';
-});
+
+namespace App\Entity;
 
 class Article
 {
-    private Long $ArticleID;
+    private Long $id;
     private Long $AuthorID;
     private string $Title;
     private string $Content;
@@ -27,10 +26,10 @@ class Article
     }
 
     public function getArticleID(){
-        return $this->ArticleID;
+        return $this->id;
     }
     public function setArticleID(Long $ID){
-        $this->ArticleID = $ID;
+        $this->id = $id;
         return $this
     }
 
