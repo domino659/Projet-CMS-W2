@@ -3,19 +3,22 @@
 namespace App\Manager;
 
 use App\Entity\Comment;
+use App\Fram\Factories\PDOFactory;
 
 class CommentManager extends BaseManager
 {
     public function getAllComment(): array
     {
-        $AllComment = [];
         $requeteSql = "SELECT * FROM comment";
         $connexion = new PDOFactory();
-        $result = $connexion -> request($requeteSql);
-        foreach ($result as $comment){
-            array_push($AllComment, new Comment($post));
-        };
-        return $AllComment;
+        $sth = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $sth->execute();
+        $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $posts = [];
+        foreach ($results as $result) {
+            $comments[] = new Comment($result);
+        }
+        return $comments;
     }
 
     public function getCommentById(){
