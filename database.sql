@@ -35,3 +35,5 @@ VALUES ('zeubimaru', 0, 'zeubimaru', 'zeubimaru@zeubimaru.com');
 
 INSERT INTO ProjetCMSW2.post (title, content, postDate, authorId)
 VALUES ('Premier Post', 'Lorem ipsum', NOW(), 1);
+INSERT INTO ProjetCMSW2.post (title, content, postDate, authorId)
+VALUES ('Deuxième Post', 'Lorem ipsum  tadaaa', NOW(), 2);
