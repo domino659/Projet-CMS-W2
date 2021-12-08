@@ -2,18 +2,20 @@
 
 namespace App\Manager;
 
-use App\Entity\Post;
+use App\Entity\Article;
 
-class PostManager extends BaseManager
+class ArticleManager extends BaseManager
 {
-
 
     /**
      * @return Post[]
      */
-    public function getAllPosts(): array
+
+    public function getAllArticle(): array
     {
-        // TODO -  Get all posts
+        $AllArticle = [];
+        $requeteSql = "SELECT * FROM article";
+        connexion = new bdd;
         return [];
     }
 
@@ -26,6 +28,7 @@ class PostManager extends BaseManager
      * @param Post $post
      * @return Post|bool
      */
+
     public function createPost(Post $post)
     {
         // TODO - create post
@@ -36,6 +39,7 @@ class PostManager extends BaseManager
      * @param Post $post
      * @return Post|bool
      */
+
     public function updatePost(Post $post)
     {
         // TODO - getPostById($post->getId())
@@ -45,6 +49,7 @@ class PostManager extends BaseManager
      * @param int $id
      * @return bool
      */
+
     public function deletePostById(int $id): bool
     {
         // TODO - Delete post
