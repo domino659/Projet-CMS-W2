@@ -16,7 +16,7 @@ class PostManager extends BaseManager
         $AllPost = [];
         $requeteSql = "SELECT * FROM post";
         $connexion = new PDOFactory();
-        $result = $connexion -> request($requestSql);
+        $result = $connexion -> request($requeteSql);
         foreach ($result as $post){
             array_push($AllPost, new Post($post));
         };
@@ -60,7 +60,9 @@ class PostManager extends BaseManager
     {
         $id = $post['id'];
         $content = $post['content'];
-        $requeteSql = "UPDATE post SET content = $content WHERE id = $id";
+        $title = $title['title'];
+        
+        $requeteSql = "UPDATE post SET content = $content, title = $title WHERE id = $id";
         $connexion = new PDOFactory();
         return $connexion->request($requeteSql);
     }

@@ -9,7 +9,7 @@ class UserManager extends BaseManager
         $AllUser = [];
         $requestSql = "SELECT * FROM user";
         $connexion = new PDOFactory();
-        $result = $connexion -> request($requestSql);
+        $result = $connexion -> request($requeteSql);
         foreach ($result as $comment){
             array_push($AllUser, new User($user));
         }
