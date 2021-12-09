@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS ProjetCMSW2.comment (
     PRIMARY KEY (id)
     );
 
+INSERT INTO ProjetCMSW2.author (username, isAdmin, password, email)
+VALUES ('domino', 1, 'domino', 'martin@sionfamily.com');
 
 INSERT INTO ProjetCMSW2.author (username, isAdmin, password, email)
 VALUES ('zeubimaru', 0, 'zeubimaru', 'zeubimaru@zeubimaru.com');
