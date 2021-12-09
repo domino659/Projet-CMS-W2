@@ -2,7 +2,7 @@
 
 <routes>
     <!-- Home -->
-    <route path="home" action="index" controller="PostController"/>
+    <route path="/" action="index" controller="PostController"/>
     <!-- Author -->
     <route path="author" action="author" controller="AuthorController"/>
     <!-- Comment -->

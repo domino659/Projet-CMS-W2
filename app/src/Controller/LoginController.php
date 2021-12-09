@@ -15,7 +15,7 @@ class LoginController extends BaseController
                 $connexion = new AuthorManager(PDOFactory::getMysqlConnection());
                 if ($connexion->userExist($email, $password)) {
                     $_SESSION['user_token'] = $connexion->constructToken($email, $password);
-                    header('Location: /home');
+                    header('Location: /');
                 } else {
 //                    TODO - Information incorrecte
                     header('Location: /login');
@@ -29,7 +29,7 @@ class LoginController extends BaseController
     public function executeLogout()
     {
         unset($_SESSION['user_token']);
-        header('Location: /home');
+        header('Location: /');
     }
         public function executeLogin()
     {

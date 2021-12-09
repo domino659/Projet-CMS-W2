@@ -12,6 +12,6 @@ foreach ($posts as $article) :
     <div>
         <h2><?= $article->getTitle(); ?></h2>
         <p><?= substr($article->getContent(), 0, 200); ?></p>
-        <a href="/article?id=<?php echo $article->getId(); ?>">Lire plus</a>
+        <a href="/article/<?= $article->getId(); ?>">Lire plus</a>
     </div>
 <?php endforeach; ?>

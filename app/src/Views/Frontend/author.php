@@ -17,7 +17,6 @@ foreach ($authors as $user) :
             <input type="checkbox" id="isAdmin" name="<?php echo $user->getId(); ?>" <?php echo $user->isAdmin() ? "checked" : ""; ?>>
             <label for="isAdmin">Is Admin</label>
         </div>
-        <button>Delete User</button>
-
+        <input name="_delete_" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
     </div>
 <?php endforeach;?>

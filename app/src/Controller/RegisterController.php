@@ -37,7 +37,7 @@ class RegisterController extends BaseController
                 $_SESSION['user_token'] = $connexion->constructToken($email, $password);
 //                }
                 Flash::setFlash('success', "Register success");
-                header('Location: /home');
+                header('Location: /');
             }
 
         }else{
