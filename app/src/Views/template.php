@@ -20,11 +20,13 @@
                     <use xlink:href="#bootstrap"/>
                 </svg>
             </a>
-
+            <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
+                <h2 class="username"><?php echo $_SESSION['user_token']['username']; ?></h2>
+            <?php } ?>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a href="Home" class="nav-link px-2 text-secondary">Home</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+                <li><a href="" class="nav-link px-2 text-white">Pricing</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
             </ul>
@@ -34,24 +36,18 @@
             </form>
 
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
+                <!-- IF USER CONNECTED -->
+                <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
+                    <a href="logout" type="button" class="btn btn-outline-light me-2">Logout</a>
+                <?php } else { ?>
+                    <!-- IF USER NOT CONNECTED -->
+                    <a href="login" type="button" class="btn btn-outline-light me-2">Login</a>
+                    <a href="register" type="button" class="btn btn-warning">Sign-in</a>
+                <?php } ?>
             </div>
         </div>
     </div>
 </header>
-
-<?php if (\App\Fram\Utils\Flash::hasFlash('success')): ?>
-    <div class="alert alert-success" role="alert">
-        <?= \App\Fram\Utils\Flash::getFlash('success'); ?>
-    </div>
-<?php endif; ?>
-
-<?php if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
-    <div class="alert alert-danger" role="alert">
-        <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
-    </div>
-<?php endif; ?>
 
 <div class="container">
     <?= $content; ?>
