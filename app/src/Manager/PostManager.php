@@ -49,7 +49,7 @@ class PostManager extends BaseManager
         $insert->bindValue(':authorid', $post['authorid'], \PDO::PARAM_INT);
         $insert->bindValue(':title', $post['title'], \PDO::PARAM_STR);
         $insert->bindValue(':content', $post['content'], \PDO::PARAM_STR);
-        $insert->bindValue(':postdate', $post['postdate'], \PDO::PARAM_INT);
+        $insert->bindValue(':postdate', $post['postdate'], \PDO::PARAM_DATETIME);
         $insert->execute();
         return true;
     }

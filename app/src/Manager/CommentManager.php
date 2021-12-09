@@ -45,18 +45,17 @@ class CommentManager extends BaseManager
         return $comment;
     }
 
-    // public function createComment(){
-    //     $requeteSql = "INSERT INTO comment (id, authorid, postid, content, postdate) Values (:id, :authorid, :postid, :content, :postdate)";
-    //     $connexion = new PDOFactory();
-    //     $insert = $connexion->dbConnect()->prepare($requeteSql);
-    //     $insert -> execute(array(
-    //         'id' -> $post['id'],
-    //         'authorid' -> $post['authorid'],
-    //         'postid' -> $post['postid'],
-    //         'content' -> $post['content'],
-    //         'postdate' -> $post['postdate']
-    //     ));
-    // }
+    public function createComment(){
+        $requeteSql = "INSERT INTO comment (authorid, postid, content, commentdate) Values (:authorid, :postid, :content, :commentdate)";
+        $connexion = new PDOFactory();
+        $insert = $connexion->request($requeteSql);
+        $insert->bindValue(':authorid', $post['authorid'], \PDO::PARAM_INT);
+        $insert->bindValue(':postid', $post['postid'], \PDO::PARAM_STR);
+        $insert->bindValue(':content', $post['content'], \PDO::PARAM_STR);
+        $insert->bindValue(':commentdate', $post['commentdate'], \PDO::PARAM_DATETIME);
+        $insert->execute();
+        ));
+    }
 
     // public function updateComment(Comment $comment)
     // {
