@@ -21,6 +21,20 @@ class CommentManager extends BaseManager
         return $comments;
     }
 
+    public function getAllCommentByPostId(int $id): array
+    {
+        $requeteSql = "SELECT * FROM comment WHERE authorId = $id";
+        $connexion = new PDOFactory();
+        $sth = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $sth->execute();
+        $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $posts = [];
+        foreach ($results as $result) {
+            $comments[] = new Comment($result);
+        }
+        return $comments;
+    }
+
     public function getCommentById(){
         $requeteSql = "SELECT * FROM comment WHERE id = $id";
         $connexion = new PDOFactory();
