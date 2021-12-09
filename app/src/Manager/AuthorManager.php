@@ -62,13 +62,12 @@ class AuthorManager extends BaseManager
     }
 
     //VERIFY IF USER EXIST
-    public function userLogin($email, $password)
+    public function userLogin($email)
     {
-        $requeteSql = "SELECT * FROM author WHERE email = :email AND password = :password";
+        $requeteSql = "SELECT password FROM author WHERE email = :email";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
-        $prepare->bindvalue(':password', $password, \PDO::PARAM_STR);
         $prepare->execute();
         return $prepare->fetch();
     }

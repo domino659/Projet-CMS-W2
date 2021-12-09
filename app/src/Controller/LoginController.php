@@ -11,13 +11,16 @@ class LoginController extends BaseController
 
     public function executeSendLogin()
     {
-        $email = $_POST['email'];
+        $email = htmlspecialchars($_POST['email']);
         $password = $_POST['password'];
 
-        if ( isset($email) && isset($password) && $email != NULL && $password != NULL){
+        if ( isset($email) && isset($password) && $email != NULL && $password != NULL)
+        {
             $connexion = new AuthorManager(PDOFactory::getMysqlConnection());
-            if ($connexion->userLogin($email, $password)) {
-                $_SESSION['user_token'] = $connexion->constructToken($email, $password);
+            $hashpassword = $connexion->userLogin($email);
+            if ( password_verify($password, $hashpassword['password']) )
+            {
+                $_SESSION['user_token'] = $connexion->constructToken($email);
                 header('Location: /');
             } else {
                 Flash::setFlash('alert', "The mail or the password you’ve entered is incorrect");
