@@ -8,7 +8,7 @@ use App\Fram\Factories\PDOFactory;
 class AuthorManager extends BaseManager
 {
   
-//    GET ALL AUTHOR
+    //GET ALL AUTHOR
     /**
      * @return Author[]
      */
@@ -27,7 +27,7 @@ class AuthorManager extends BaseManager
         return $authors;
     }
 
-//    GET AUTHOR BY ID
+    //GET AUTHOR BY ID
     public function getAuthorById(int $id): Author
     {
         $requeteSql = "SELECT * FROM author WHERE id = $id";
@@ -47,8 +47,9 @@ class AuthorManager extends BaseManager
 //    CONSTRUCT TOKEN
     public function constructToken($email)
     {
+        $requeteSql = "SELECT username, isAdmin, email FROM author WHERE email = :email";
         $connexion = new PDOFactory();
-        $results = $connexion->getMysqlConnection()->prepare("SELECT username, isAdmin, email FROM author WHERE email = :email");
+        $results = $connexion->getMysqlConnection()->prepare($requeteSql);
         $results->execute(
             array(
                 'email' => $email
