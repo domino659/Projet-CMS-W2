@@ -1,11 +1,18 @@
 <?php
 
 namespace App\Manager;
+
+use App\Entity\Author;
 use App\Fram\Factories\PDOFactory;
 
 class AuthorManager extends BaseManager
 {
+  
 //    GET ALL AUTHOR
+    /**
+     * @return Author[]
+     */
+
     public function getAllAuthor(): array
     {
         $requeteSql = "SELECT * FROM author";
@@ -13,7 +20,7 @@ class AuthorManager extends BaseManager
         $sth = $connexion->getMysqlConnection()->prepare($requeteSql);
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        $posts = [];
+        $authors = [];
         foreach ($results as $result) {
             $authors[] = new Author($result);
         }

@@ -24,10 +24,9 @@
                 <h2 class="username"><?php echo $_SESSION['user_token']['username']; ?></h2>
             <?php } ?>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="Home" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                <li><a href="" class="nav-link px-2 text-white">Pricing</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                <li><a href="home" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a href="author" class="nav-link px-2 text-white">User</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Api</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
             </ul>
 

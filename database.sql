@@ -28,12 +28,17 @@ CREATE TABLE IF NOT EXISTS ProjetCMSW2.comment (
     PRIMARY KEY (id)
     );
 
-INSERT INTO ProjetCMSW2.author (username, isAdmin, password, email)
-VALUES ('domino', 1, 'domino', 'martin@sionfamily.com');
+
 INSERT INTO ProjetCMSW2.author (username, isAdmin, password, email)
 VALUES ('zeubimaru', 0, 'zeubimaru', 'zeubimaru@zeubimaru.com');
 
 INSERT INTO ProjetCMSW2.post (title, content, postDate, authorId)
 VALUES ('Premier Post', 'Lorem ipsum', NOW(), 1);
 INSERT INTO ProjetCMSW2.post (title, content, postDate, authorId)
-VALUES ('Deuxième Post', 'Lorem ipsum  tadaaa', NOW(), 2);
+VALUES ('Deuxieme Post', 'Lorem ipsum  tadaaa', NOW(), 2);
+
+INSERT INTO ProjetCMSW2.comment (content, commentDate, authorId, postId)
+VALUES ('zib zab zoub zoubida', NOW(), 1, 1);
+
+INSERT INTO ProjetCMSW2.comment (content, commentDate, authorId, postId)
+VALUES ('zongo le dozo', NOW(), 2, 2);

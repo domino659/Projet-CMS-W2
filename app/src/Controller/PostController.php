@@ -6,6 +6,7 @@ use App\Entity\Author;
 use App\Fram\Factories\PDOFactory;
 use App\Fram\Utils\Flash;
 use App\Manager\PostManager;
+use App\Manager\AuthorManager;
 
 class PostController extends BaseController
 {
@@ -21,33 +22,10 @@ class PostController extends BaseController
             'home.php',
             [
                 'posts' => $posts,
-                'user' => new Author(),
+                //'user' => new Author(),
                 'test' => 'je suis un test'
             ],
             'Home page'
-        );
-
-    }
-
-    public function executeShow()
-    {
-        Flash::setFlash('alert', 'je suis une alerte');
-
-        $this->render(
-            'show.php',
-            [
-                'test' => 'article ' . $this->params['id']
-            ],
-            'Show Page'
-        );
-    }
-
-    public function executeAuthor()
-    {
-        $this->render(
-            'author.php',
-            [],
-            'Auteur'
         );
     }
 }

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <routes>
-    <route path="/" action="index" controller="PostController"/>
-    <route path="show" action="show" controller="PostController" params="id"/>
-    <route path="author" action="author" controller="PostController"/>
-    <route path="/" action="home" controller="HomeController"/>
-
-<!--    LOGIN-->
+    <!-- Home -->
+    <route path="home" action="index" controller="PostController"/>
+    <!-- Author -->
+    <route path="author" action="author" controller="AuthorController"/>
+    <!-- Comment -->
+    <route path="article" action="comment" controller="CommentController" params="id"/>
+    <!--    LOGIN-->
     <route path="login" action="Login" controller="LoginController"/>
     <route path="sendlogin" action="SendLogin" controller="LoginController"/>
-
     <!-- REGISTER -->
     <route path="register" action="Register" controller="RegisterController"/>
     <route path="sendregister" action="SendRegister" controller="RegisterController"/>
-
-<!--    DISCONNECT-->
+    <!--    DISCONNECT-->
     <route path="logout" action="logout" controller="LoginController"/>
 </routes>
