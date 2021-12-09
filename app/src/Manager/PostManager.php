@@ -41,19 +41,18 @@ class PostManager extends BaseManager
      * @return Post|bool
      */
 
-    public function createPost(Post $post)
+    public function createPost($authorid, $title, $content, $date)
     {
         $requeteSql = "INSERT INTO post (authorid, title, content, postdate) Values (:authorid, :title, :content, :postdate)";
         $connexion = new PDOFactory();
         $insert = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $insert->bindValue(':authorid', $post['authorid'], \PDO::PARAM_INT);
-        $insert->bindValue(':title', $post['title'], \PDO::PARAM_STR);
-        $insert->bindValue(':content', $post['content'], \PDO::PARAM_STR);
-        $insert->bindValue(':postdate', $post['postdate'], \PDO::PARAM_DATETIME);
+        $insert->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
+        $insert->bindValue(':title', $title, \PDO::PARAM_STR);
+        $insert->bindValue(':content', $content, \PDO::PARAM_STR);
+        $insert->bindValue(':postdate', $date, \PDO::PARAM_STR);
         $insert->execute();
         return true;
     }
-
     /**
      * @param Post $post
      * @return Post|bool

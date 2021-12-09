@@ -20,10 +20,23 @@ class CommentController extends BaseController
             'article.php',
             [
                 'comments' => $comments,
-                //'user' => new Author(),
-                'test' => 'je suis un test'
             ],
             'comment page'
         );
+    }
+
+    public function executeCreateComment(){
+
+        $date = date('Y-m-d H:i:s');
+        $content = $_POST['content'];
+        $postid = $_GET['id'];
+        $authorid = 1;
+
+        if(!empty($content))
+        {
+            $connexion = new CommentManager(PDOFactory::getMysqlConnection());
+            $connexion->createComment($authorid, $postid, $content, $date);
+            header('Location: /');
+        }
     }
 }

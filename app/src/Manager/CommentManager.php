@@ -45,14 +45,14 @@ class CommentManager extends BaseManager
         return $comment;
     }
 
-    public function createComment(){
+    public function createComment($authorid, $postid, $content, $commentdate){
         $requeteSql = "INSERT INTO comment (authorid, postid, content, commentdate) Values (:authorid, :postid, :content, :commentdate)";
         $connexion = new PDOFactory();
         $insert = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $insert->bindValue(':authorid', $post['authorid'], \PDO::PARAM_INT);
-        $insert->bindValue(':postid', $post['postid'], \PDO::PARAM_STR);
-        $insert->bindValue(':content', $post['content'], \PDO::PARAM_STR);
-        $insert->bindValue(':commentdate', $post['commentdate'], \PDO::PARAM_DATETIME);
+        $insert->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
+        $insert->bindValue(':postid', $postid, \PDO::PARAM_STR);
+        $insert->bindValue(':content', $content, \PDO::PARAM_STR);
+        $insert->bindValue(':commentdate', $commentdate, \PDO::PARAM_STR);
         $insert->execute();
     }
 

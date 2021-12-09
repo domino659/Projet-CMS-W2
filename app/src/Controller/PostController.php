@@ -28,4 +28,28 @@ class PostController extends BaseController
             'Home page'
         );
     }
+
+    public function executePost()
+    {
+        $this->render(
+            'post.php',
+            [],
+            'Post'
+        );
+    }
+
+    public function executeCreatePost()
+    {
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $userid = 1;
+        $date = date('Y-m-d H:i:s');
+
+        if(!empty($title) && !empty($content))
+        {
+            $connexion = new PostManager(PDOFactory::getMysqlConnection());
+            $connexion->createPost($userid, $title, $content, $date);
+            header('Location: /');
+        }
+    }
 }

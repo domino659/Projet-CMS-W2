@@ -14,3 +14,13 @@ foreach ($comments as $comment) :
         <p><?= $comment->getContent(); ?></p>
     </div>
 <?php endforeach; ?>
+
+<h1>Add comment</h1>
+<form action="CreateComment" method="post">
+    <div>
+            <textarea id="content" name="content" rows="10" cols="50">
+                Type you new comment here...
+            </textarea>
+    </div>
+    <button>Create comment</button>
+</form>
