@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <routes>
+    <!-- Home -->
     <route path="/" action="index" controller="PostController"/>
+    <route path="home" action="index" controller="PostController"/>
     <route path="show" action="show" controller="PostController" params="id"/>
-    <route path="author" action="author" controller="PostController"/>
+
+    <!-- Author -->
+    <route path="author" action="author" controller="AuthorController"/>
 </routes>

@@ -1,10 +1,17 @@
 <?php
 
 namespace App\Manager;
+
+use App\Entity\Author;
 use App\Fram\Factories\PDOFactory;
 
 class AuthorManager extends BaseManager
 {
+
+    /**
+     * @return Author[]
+     */
+
     public function getAllAuthor(): array
     {
         $requeteSql = "SELECT * FROM author";
@@ -12,7 +19,7 @@ class AuthorManager extends BaseManager
         $sth = $connexion->getMysqlConnection()->prepare($requeteSql);
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        $posts = [];
+        $authors = [];
         foreach ($results as $result) {
             $authors[] = new Author($result);
         }
@@ -28,7 +35,7 @@ class AuthorManager extends BaseManager
 
     public function createAuthor(Author $Author)
     {
-        $requeteSql = "INSERT INTO Author (id, Authorname, isadmin, password, mail) Values (:id, :Authorname, :isadmin, :password, :mail)";
+        $requeteSql = "INSERT INTO Author (id, Authorname, isadmin, password, email) Values (:id, :Authorname, :isadmin, :password, :email)";
         $connexion = new PDOFaxtory();
         $insert = $connexion->dbConnect()->prepare($requeteSql);
         $insert->execute(array(
@@ -36,7 +43,7 @@ class AuthorManager extends BaseManager
             'authorName' -> $post['Authorname'],
             'isAdmin' -> $post['isadmin'],
             'password' -> $post['password'],
-            'mail' -> $post['mail']
+            'email' -> $post['email']
         ));
         return true;
     }

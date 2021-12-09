@@ -8,17 +8,17 @@ class Author
     private string $username;
     private bool $isAdmin;
     private string $password;
-    private string $mail;
+    private string $email;
 
-    public function __construct(array $data = []){
-       $this->hydrate($data);
+    public function __construct(array $data){
+        $this->hydrate($data);
     }
 
     public function hydrate($data){
         foreach($data as $key => $value) {
             $method = 'set' . ucfirst($key);
             if (is_callable([$this, $method])) {
-                $this->method($value);
+                $this->$method($value);
             }
         }
     }
@@ -90,16 +90,16 @@ class Author
     /**
      * @return string
      */
-    public function getMail(): string
+    public function getEmail(): string
     {
-        return $this->mail;
+        return $this->email;
     }
 
     /**
-     * @param string $mail
+     * @param string $email
      */
-    public function setMail(string $mail): void
+    public function setEmail(string $email): void
     {
-        $this->mail = $mail;
+        $this->email = $email;
     }
 }
