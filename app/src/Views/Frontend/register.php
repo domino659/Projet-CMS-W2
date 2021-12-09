@@ -1,4 +1,9 @@
 <h1>Register</h1>
+<?php if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
+    </div>
+<?php endif; ?>
 <form action="sendRegister" method="post">
     <div>
         <label for="name">Name :</label>
