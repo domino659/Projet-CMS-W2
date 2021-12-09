@@ -13,7 +13,7 @@ class LoginController extends BaseController
                 $email = $_POST['email'];
                 $password = $_POST['password'];
                 $connexion = new AuthorManager(PDOFactory::getMysqlConnection());
-                if ($connexion->userExist($email, $password)) {
+                if ($connexion->userLogin($email, $password)) {
                     $_SESSION['user_token'] = $connexion->constructToken($email, $password);
                     header('Location: /');
                 } else {

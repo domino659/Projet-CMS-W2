@@ -29,14 +29,12 @@ class RegisterController extends BaseController
 
         if(!empty($username) && !empty($password) && !empty($verif_password) && !empty($email)){
             if($password !== $verif_password){
-                Flash::setFlash('alert', "Mot de passe diff");
                 header('Location: /register');
             }else{
                 $connexion = new AuthorManager(PDOFactory::getMysqlConnection());
                 $connexion->createAuthor($username, $isAdmin, $password, $email);
                 $_SESSION['user_token'] = $connexion->constructToken($email, $password);
 //                }
-                Flash::setFlash('success', "Register success");
                 header('Location: /');
             }
 

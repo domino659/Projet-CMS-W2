@@ -12,7 +12,6 @@ class AuthorManager extends BaseManager
     /**
      * @return Author[]
      */
-
     public function getAllAuthor(): array
     {
         $requeteSql = "SELECT * FROM author";
@@ -36,29 +35,6 @@ class AuthorManager extends BaseManager
         $comment->bindValue(':id', $id, \PDO::PARAM_INT);
         $comment->execute();
         return $comment;
-    }
-
-    //VERIFY IF USER EXIST
-    public function userExist($email, $mdp)
-    {
-        $requeteSql = "SELECT * FROM author WHERE email = ? and password = ?";
-        $connexion = $this->pdo->prepare($requeteSql);
-        $connexion->execute(array($email, $mdp));
-        return $connexion->fetch();
-    }
-
-//    CONSTRUCT TOKEN
-    public function constructToken($email)
-    {
-        $requeteSql = "SELECT username, isAdmin, email FROM author WHERE email = :email";
-        $connexion = new PDOFactory();
-        $results = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $results->execute(
-            array(
-                'email' => $email
-            )
-        );
-        return  $results->fetch(\PDO::FETCH_ASSOC);
     }
 
     //CREATE AUTHOR
@@ -85,4 +61,34 @@ class AuthorManager extends BaseManager
         $comment->execute();
         return true;
     }
+
+    //VERIFY IF USER EXIST
+    public function userLogin($email, $password)
+    {
+        $requeteSql = "SELECT * FROM author WHERE email = :email AND password = :password";
+        $connexion = new PDOFactory();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
+        $prepare->bindvalue(':password', $password, \PDO::PARAM_STR);
+        $prepare->execute();
+        return $prepare->fetch();
+    }
+
+    //IS MAIL UNIQUE
+
+    //CONSTRUCT TOKEN
+    public function constructToken($email)
+    {
+        $requeteSql = "SELECT username, isAdmin, email FROM author WHERE email = :email";
+        $connexion = new PDOFactory();
+        $results = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $results->execute(
+            array(
+                'email' => $email
+            )
+        );
+        return  $results->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    //VERIFY TOKEN
 }
