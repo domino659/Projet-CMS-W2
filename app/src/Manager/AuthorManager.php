@@ -16,12 +16,12 @@ class AuthorManager extends BaseManager
     {
         $requeteSql = "SELECT * FROM author";
         $connexion = new PDOFactory();
-        $sth = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $sth->execute();
-        $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->execute();
+        $result = $prepare->fetchAll(\PDO::FETCH_ASSOC);
         $authors = [];
-        foreach ($results as $result) {
-            $authors[] = new Author($result);
+        foreach ($result as $author) {
+            $authors[] = new Author($author);
         }
         return $authors;
     }
@@ -31,23 +31,23 @@ class AuthorManager extends BaseManager
     {
         $requeteSql = "SELECT * FROM author WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
-        $comment->execute();
-        return $comment;
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->execute();
+        return $prepare;
     }
 
     //CREATE AUTHOR
-    public function createAuthor(Author $author)
+    public function createAuthor($username, $isAdmin, $password, $email)
     {
         $requeteSql = "INSERT INTO author (username, isAdmin, password, email) Values (:username, :isAdmin, :password, :email)";
         $connexion = new PDOFactory();
-        $insert = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $insert->bindValue(':username', $author['username'], \PDO::PARAM_INT);
-        $insert->bindValue(':isAdmin', $author['isAdmin'], \PDO::PARAM_BOOLEAN);
-        $insert->bindValue(':password', $author['password'], \PDO::PARAM_STR);
-        $insert->bindValue(':email', $author['email'], \PDO::PARAM_STR);
-        $insert->execute();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':username', $username, \PDO::PARAM_STR);
+        $prepare->bindValue(':isAdmin', $isAdmin, \PDO::PARAM_BOOL);
+        $prepare->bindValue(':password', $password, \PDO::PARAM_STR);
+        $prepare->bindValue(':email', $email, \PDO::PARAM_STR);
+        $prepare->execute();
         return true;
     }
 
@@ -55,10 +55,10 @@ class AuthorManager extends BaseManager
     {
         $requeteSql = "DELETE FROM author WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
-        $comment->execute();
-        return true;
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->execute();
+        return $prepare->fetch();;;
     }
 
     //VERIFY IF USER EXIST
@@ -73,21 +73,39 @@ class AuthorManager extends BaseManager
         return $prepare->fetch();
     }
 
-    //IS MAIL UNIQUE
+    //VERIFY IS USER UNIQUE
+    public function isUserUnique($email)
+    {
+        $requeteSql = "SELECT email FROM author WHERE email = :email";
+        $connexion = new PDOFactory();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
+        $prepare->execute();
+        return $prepare->fetch();;
+    }
 
     //CONSTRUCT TOKEN
     public function constructToken($email)
     {
-        $requeteSql = "SELECT username, isAdmin, email FROM author WHERE email = :email";
+        $requeteSql = "SELECT id, username, isAdmin, email FROM author WHERE email = :email";
         $connexion = new PDOFactory();
-        $results = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $results->execute(
-            array(
-                'email' => $email
-            )
-        );
-        return  $results->fetch(\PDO::FETCH_ASSOC);
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
+        $prepare->execute();
+        return  $prepare->fetch(\PDO::FETCH_ASSOC);
     }
 
     //VERIFY TOKEN
+    public function tokenVerification($id, $username, $isAdmin, $email)
+    {
+        $requeteSql = "SELECT id, username, isAdmin, email FROM author WHERE id = :id AND username = :username AND isAdmin = :isAdmin AND email = :email";
+        $connexion = new PDOFactory();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindvalue(':id', $id, \PDO::PARAM_INT);
+        $prepare->bindvalue(':username', $username, \PDO::PARAM_STR);
+        $prepare->bindvalue(':isAdmin', $isAdmin, \PDO::PARAM_BOOL);
+        $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
+        $prepare->execute();
+        return $prepare->fetch();
+    }
 }
