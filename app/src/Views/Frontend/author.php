@@ -13,5 +13,9 @@ foreach ($authors as $user) :
         <h2><?= $user->getUsername(); ?></h2>
         <p><?= $user->getId(); ?></p>
         <p><?= $user->getEmail(); ?></p>
+        <div>
+            <input type="checkbox" id="isAdmin" name="isAdmin" <?php echo $user->isAdmin() ? "checked" : ""; ?>>
+            <label for="isAdmin">Is Admin</label>
+        </div>
     </div>
 <?php endforeach; ?>
