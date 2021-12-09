@@ -2,12 +2,17 @@
 
 <routes>
     <!-- Home -->
-    <route path="/" action="index" controller="PostController"/>
     <route path="home" action="index" controller="PostController"/>
-
     <!-- Author -->
     <route path="author" action="author" controller="AuthorController"/>
-
     <!-- Comment -->
     <route path="article" action="comment" controller="CommentController" params="id"/>
+    <!--    LOGIN-->
+    <route path="login" action="Login" controller="LoginController"/>
+    <route path="sendlogin" action="SendLogin" controller="LoginController"/>
+    <!-- REGISTER -->
+    <route path="register" action="Register" controller="RegisterController"/>
+    <route path="sendregister" action="SendRegister" controller="RegisterController"/>
+    <!--    DISCONNECT-->
+    <route path="logout" action="logout" controller="LoginController"/>
 </routes>
