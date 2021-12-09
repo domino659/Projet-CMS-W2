@@ -19,11 +19,13 @@ class RegisterController extends BaseController
 
     public function executeSendRegister()
     {
-        $username = $_POST['username'];
+        $username = htmlspecialchars($_POST['username']);
         $isAdmin = $_POST['isAdmin'];
         $password = $_POST['password'];
-        $verif_password = $_POST['verif_password'];
-        $email = $_POST['email'];
+        $verif_password = htmlspecialchars($_POST['verif_password']);
+        $email = htmlspecialchars($_POST['email']);
+
+        $hashpassword = password_hash ( $password , PASSWORD_DEFAULT);
 
         if ( isset($username) && isset($password) && isset($verif_password) && isset($email)
             && $username != NULL && $password != NULL && $verif_password != NULL && $email != NULL)
@@ -33,7 +35,7 @@ class RegisterController extends BaseController
                 $connexion = new AuthorManager(PDOFactory::getMysqlConnection());
                 if ( $connexion->isUserUnique($email) == null )
                 {
-                    $connexion->createAuthor($username, $isAdmin, $password, $email);
+                    $connexion->createAuthor($username, $isAdmin, $hashpassword, $email);
                     $_SESSION['user_token'] = $connexion->constructToken($email, $password);
                     header('Location: /');
                     exit;
