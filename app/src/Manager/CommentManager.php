@@ -37,9 +37,12 @@ class CommentManager extends BaseManager
     }
 
     public function getCommentById(){
-        $requeteSql = "SELECT * FROM comment WHERE id = $id";
+        $requeteSql = "SELECT * FROM comment WHERE id = :id";
         $connexion = new PDOFactory();
-        return $connexion->request($requeteSql);
+        $comment = $connexion->request($requeteSql);
+        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
+        $comment->execute();
+        return $comment;
     }
 
     // public function createComment(){

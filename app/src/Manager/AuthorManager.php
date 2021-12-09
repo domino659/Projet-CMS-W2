@@ -30,12 +30,15 @@ class AuthorManager extends BaseManager
     //GET AUTHOR BY ID
     public function getAuthorById(int $id): Author
     {
-        $requeteSql = "SELECT * FROM author WHERE id = $id";
+        $requeteSql = "SELECT * FROM author WHERE id = :id";
         $connexion = new PDOFactory();
-        return $connexion->request($requeteSql);
+        $comment = $connexion->request($requeteSql);
+        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
+        $comment->execute();
+        return $comment;
     }
 
-//    VERIFY IF USER EXIST
+    //VERIFY IF USER EXIST
     public function userExist($email, $mdp)
     {
         $requeteSql = "SELECT * FROM author WHERE email = ? and password = ?";
@@ -58,7 +61,7 @@ class AuthorManager extends BaseManager
         return  $results->fetch(\PDO::FETCH_ASSOC);
     }
 
-//    CREATE AUTHOR
+    //CREATE AUTHOR
     public function createAuthor($username, $isAdmin, $password, $email)
     {
         $requeteSql = "INSERT INTO author (username, isAdmin, password, email) Values (:username, :isAdmin, :password, :email)";
@@ -75,8 +78,11 @@ class AuthorManager extends BaseManager
 
     public function deleteAuthorById(int $id): bool
     {
-        $requeteSql = "DELETE FROM author WHERE id = $id";
+        $requeteSql = "DELETE FROM author WHERE id = :id";
         $connexion = new PDOFactory();
-        return $connexion->request($requeteSql);
+        $comment = $connexion->request($requeteSql);
+        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
+        $comment->execute();
+        return true;
     }
 }
