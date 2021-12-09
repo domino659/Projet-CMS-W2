@@ -32,7 +32,7 @@ class AuthorManager extends BaseManager
     {
         $requeteSql = "SELECT * FROM author WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->request($requeteSql);
+        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
         $comment->bindValue(':id', $id, \PDO::PARAM_INT);
         $comment->execute();
         return $comment;
@@ -53,26 +53,22 @@ class AuthorManager extends BaseManager
         $requeteSql = "SELECT username, isAdmin, email FROM author WHERE email = :email";
         $connexion = new PDOFactory();
         $results = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $results->execute(
-            array(
-                'email' => $email
-            )
-        );
+        $results->bindValue(':email', $email, \PDO::PARAM_STR);
+        $results->execute;
         return  $results->fetch(\PDO::FETCH_ASSOC);
     }
 
     //CREATE AUTHOR
-    public function createAuthor($username, $isAdmin, $password, $email)
+    public function createAuthor(Author $author)
     {
         $requeteSql = "INSERT INTO author (username, isAdmin, password, email) Values (:username, :isAdmin, :password, :email)";
         $connexion = new PDOFactory();
         $insert = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $insert->execute(array(
-            'username' => $username,
-            'isAdmin' => $isAdmin,
-            'password' => $password,
-            'email' => $email
-        ));
+        $insert->bindValue(':username', $author['username'], \PDO::PARAM_INT);
+        $insert->bindValue(':isAdmin', $author['isAdmin'], \PDO::PARAM_BOOLEAN);
+        $insert->bindValue(':password', $author['password'], \PDO::PARAM_STR);
+        $insert->bindValue(':email', $author['email'], \PDO::PARAM_STR);
+        $insert->execute();
         return true;
     }
 
@@ -80,7 +76,7 @@ class AuthorManager extends BaseManager
     {
         $requeteSql = "DELETE FROM author WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->request($requeteSql);
+        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
         $comment->bindValue(':id', $id, \PDO::PARAM_INT);
         $comment->execute();
         return true;

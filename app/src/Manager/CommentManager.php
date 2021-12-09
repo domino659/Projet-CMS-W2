@@ -39,7 +39,7 @@ class CommentManager extends BaseManager
     public function getCommentById(){
         $requeteSql = "SELECT * FROM comment WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->request($requeteSql);
+        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
         $comment->bindValue(':id', $id, \PDO::PARAM_INT);
         $comment->execute();
         return $comment;
@@ -48,7 +48,7 @@ class CommentManager extends BaseManager
     public function createComment(){
         $requeteSql = "INSERT INTO comment (authorid, postid, content, commentdate) Values (:authorid, :postid, :content, :commentdate)";
         $connexion = new PDOFactory();
-        $insert = $connexion->request($requeteSql);
+        $insert = $connexion->getMysqlConnection()->prepare($requeteSql);
         $insert->bindValue(':authorid', $post['authorid'], \PDO::PARAM_INT);
         $insert->bindValue(':postid', $post['postid'], \PDO::PARAM_STR);
         $insert->bindValue(':content', $post['content'], \PDO::PARAM_STR);
