@@ -39,7 +39,6 @@ class RegisterController extends BaseController
             }
 
         }else{
-            Flash::setFlash('alert', "Veuillez bien remplir le formulaire");
             header('Location: /register');
         }
     }
