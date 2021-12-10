@@ -27,7 +27,7 @@
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                 <li><a href="/post" class="nav-link px-2 text-secondary">Post</a></li>
                 <li><a href="/author" class="nav-link px-2 text-white">User</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Api</a></li>
+                <li><a href="/api" class="nav-link px-2 text-white">Api</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
             </ul>
 
