@@ -8,6 +8,7 @@ use App\Fram\Factories\PDOFactory;
 use App\Fram\Utils\Flash;
 use App\Manager\CommentManager;
 use App\Manager\PostManager;
+use App\Manager\AuthorManager;
 
 class CommentController extends BaseController
 {
@@ -42,5 +43,31 @@ class CommentController extends BaseController
             $connexion->createComment($authorid, $postid, $content, $date);
             header('Location: /');
         }
+    }
+
+    public function executeDeleteComment()
+    {
+        $current_user_id = $_SESSION['user_token']['id'];
+        $target_comment_id = $_POST['target_comment_id'];
+        $target_author_id = $_POST['target_author_id'];
+
+        $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
+        $token = $_SESSION['user_token'];
+        $db_token = $authorManager->tokenVerification($_SESSION['user_token']['id'], $_SESSION['user_token']['username'], $_SESSION['user_token']['isAdmin'], $_SESSION['user_token']['email']);
+        if ($token == $db_token) {
+            if ($current_user_id == $target_author_id OR $_SESSION['user_token']['isAdmin'] == 1)
+            {
+                $connexion = new CommentManager(PDOFactory::getMysqlConnection());
+                $connexion->deleteComment($target_comment_id);
+                Flash::setFlash('alert', "Delete Successful.");
+            }
+            else {
+                Flash::setFlash('alert', "This is not your comment you can't delete it.");
+            }
+        }
+        else {
+            Flash::setFlash('alert', "Leave that token alone.");
+        }
+        header('Location: /');
     }
 }

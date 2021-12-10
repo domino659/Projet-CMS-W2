@@ -23,6 +23,7 @@
     <!-- Comment -->
     <route path="article" action="comment" controller="CommentController" params="id"/>
     <route path="createcomment" action="CreateComment" controller="CommentController"/>
+    <route path="deletecomment" action="DeleteComment" controller="CommentController"/>
 
     <!-- Api -->
     <route path="api" action="api" controller="ApiController"/>

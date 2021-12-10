@@ -59,21 +59,21 @@ class CommentManager extends BaseManager
         return true;
     }
 
+    public function deleteComment($id)
+    {
+        $requeteSql = "DELETE FROM comment WHERE id = :id";
+        $connexion = new PDOFactory();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->execute();
+        return true;
+    }
+
     // public function updateComment(Comment $comment)
     // {
     //     $id = $post['id'];
     //     $content = $comment['content'];
     //     $requeteSql = "UPDATE comment SET :content WHERE :id";
-    //     $connexion = new PDOFactory();
-    //     $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-    //     $prepare->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
-    //     $prepare->execute;
-    //     $prepare->execute;
-    // }
-
-    // public function deleteComment($id)
-    // {
-    //     $requeteSql = "DELETE FROM comment WHERE id = $id";
     //     $connexion = new PDOFactory();
     //     $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
     //     $prepare->bindValue(':id', $_GET['id'], PDO::PARAM_INT);

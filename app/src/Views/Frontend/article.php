@@ -29,6 +29,11 @@ foreach ($comments as $comment) :
         <h2><?= $comment->getId(); ?></h2>
         <p><?= $comment->getContent(); ?></p>
     </div>
+    <form action="/deleteComment" method="post">
+        <input type="hidden" name="target_comment_id" value="<?= $post->getId(); ?>">
+        <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
+        <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+    </form>
 
 <?php endforeach; ?>
 
