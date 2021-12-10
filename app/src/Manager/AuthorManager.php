@@ -114,6 +114,6 @@ class AuthorManager extends BaseManager
         $prepare->bindvalue(':isAdmin', $isAdmin, \PDO::PARAM_BOOL);
         $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
         $prepare->execute();
-        return $prepare->fetch();
+        return $prepare->fetch(\PDO::FETCH_ASSOC);
     }
 }
