@@ -50,4 +50,31 @@ class PostController extends BaseController
             header('Location: /');
         }
     }
+
+    public function executeDeletePost()
+    {
+        $current_user_id = $_SESSION['user_token']['id'];
+        $target_post_id = $_POST['target_user_id'];
+
+        $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
+        $token = $_SESSION['user_token'];
+        $db_token = $authorManager->tokenVerification($_SESSION['user_token']['id'], $_SESSION['user_token']['username'], $_SESSION['user_token']['isAdmin'], $_SESSION['user_token']['email']);
+//        Check if the token was not modified
+        if ($token == $db_token) {
+//            Flash::setFlash('alert', "You played fair.");
+            if ($current_user_id == $target_post_id OR $_SESSION['user_token'][isAdmin] == 1)
+            {
+                $connexion = new PostManager(PDOFactory::getMysqlConnection());
+                $connexion->deletePostById($target_post_id);
+                Flash::setFlash('alert', "Delete Successful.");
+            }
+            else {
+                Flash::setFlash('alert', "This is not your post you can't delete it.");
+            }
+        }
+        else {
+            Flash::setFlash('alert', "Leave that token alone.");
+        }
+        header('Location: /author');
+    }
 }

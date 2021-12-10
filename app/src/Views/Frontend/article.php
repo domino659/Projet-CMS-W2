@@ -1,4 +1,20 @@
+
 <h1>Article</h1>
+
+<?php
+if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
+    </div>
+<?php endif; ?>
+
+<h2><?= $post->getTitle(); ?></h2>
+<p><?= $post->getContent(); ?></p>
+
+<form action="deletePost" method="post">
+    <input type="hidden" name="target_post_id" value="<?= $post->getAuthorId(); ?>">
+    <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+</form>
 
 <?php
 
@@ -8,10 +24,11 @@ foreach ($comments as $comment) :
         <h2><?= $comment->getId(); ?></h2>
         <p><?= $comment->getContent(); ?></p>
     </div>
+
 <?php endforeach; ?>
 
 <h1>Add comment</h1>
-<form action="CreateComment" method="post">
+<form action="createComment" method="post">
     <div>
             <textarea id="content" name="content" rows="10" cols="50">
                 Type your new comment here...

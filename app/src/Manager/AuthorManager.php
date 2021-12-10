@@ -67,7 +67,7 @@ class AuthorManager extends BaseManager
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
         $prepare->execute();
-        return $prepare->fetch();
+        return true;
     }
 
     //VERIFY IF USER EXIST
