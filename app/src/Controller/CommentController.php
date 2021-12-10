@@ -21,7 +21,7 @@ class CommentController extends BaseController
             [
                 'comments' => $comments,
             ],
-            'comment page'
+            'Comment'
         );
     }
 
