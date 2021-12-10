@@ -49,6 +49,11 @@ class PostController extends BaseController
             $connexion->createPost($userid, $title, $content, $date);
             header('Location: /');
         }
+        else 
+        {
+            //Flash::setFlash('alert', "Please fill title and content.");
+            header('Location: /post');
+        }
     }
 
     public function executeDeletePost()
