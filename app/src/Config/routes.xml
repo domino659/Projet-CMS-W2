@@ -3,24 +3,37 @@
 <routes>
     <!-- Home -->
     <route path="/" action="index" controller="PostController"/>
+
+    <!-- Author -->
+    <route path="author" action="author" controller="AuthorController"/>
+    <route path="deleteuser" action="DeleteUser" controller="AuthorController"/>
+    <route path="modifyuseradmin" action="ModifyUserAdmin" controller="AuthorController"/>
+
+    <route path="setting" action="setting" controller="AuthorController"/>
+    <route path="modifyuser" action="ModifyUser" controller="AuthorController"/>
+
     <!-- Post -->
     <route path="post" action="Post" controller="PostController"/>
     <route path="createpost" action="CreatePost" controller="PostController"/>
-    <!-- Author -->
-    <route path="author" action="author" controller="AuthorController"/>
+    <route path="deletepost" action="DeletePost" controller="PostController"/>
+
     <!-- Comment -->
     <route path="article" action="comment" controller="CommentController" params="id"/>
-    <route path="CreateComment" action="CreateComment" controller="CommentController" params="id"/>
+    <route path="createcomment" action="CreateComment" controller="CommentController"/>
+
     <!-- Api -->
     <route path="api" action="api" controller="ApiController"/>
     <route path="getpostapi" action="GetPostApi" controller="ApiController"/>
     <route path="getuserapi" action="GetUserApi" controller="ApiController"/>
-    <!--    LOGIN-->
+
+    <!-- LOGIN-->
     <route path="login" action="Login" controller="LoginController"/>
     <route path="sendlogin" action="SendLogin" controller="LoginController"/>
+
     <!-- REGISTER -->
     <route path="register" action="Register" controller="RegisterController"/>
     <route path="sendregister" action="SendRegister" controller="RegisterController"/>
-    <!--    DISCONNECT-->
-    <route path="logout" action="logout" controller="LoginController"/>
+
+    <!-- DISCONNECT-->
+    <route path="logout" action="Logout" controller="LoginController"/>
 </routes>

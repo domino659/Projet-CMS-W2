@@ -25,12 +25,16 @@
             <?php } ?>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="/post" class="nav-link px-2 text-secondary">Post</a></li>
-                <li><a href="/author" class="nav-link px-2 text-white">User</a></li>
+                <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
+                    <li><a href="/post" class="nav-link px-2 text-secondary">New Post</a></li>
+                    <li><a href="/author" class="nav-link px-2 text-white">User</a></li>
+                <?php } ?>
+                <li><a href="#" class="nav-link px-2 text-white">Api</a></li>
                 <li><a href="/api" class="nav-link px-2 text-white">Api</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
             </ul>
-
+            <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
+                <a href="setting" type="button" class="link px-2 text-white">Setting</a>
+            <?php } ?>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                 <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
             </form>

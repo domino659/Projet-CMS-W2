@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Fram\Factories\PDOFactory;
 use App\Fram\Utils\Flash;
 use App\Manager\CommentManager;
+use App\Manager\PostManager;
 
 class CommentController extends BaseController
 {
@@ -15,13 +16,16 @@ class CommentController extends BaseController
         $postId = $_GET['id'];
         $commentManager = new CommentManager(PDOFactory::getMysqlConnection());
         $comments = $commentManager->getAllCommentByPostId($postId);
+        $postManager = new PostManager(PDOFactory::getMysqlConnection());
+        $post = $postManager->getPostById($postId);
 
         $this->render(
             'article.php',
             [
+                'post' => $post,
                 'comments' => $comments,
             ],
-            'comment page'
+            'Comment'
         );
     }
 
