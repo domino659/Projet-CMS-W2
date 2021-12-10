@@ -10,10 +10,16 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
 
 <h2><?= $post->getTitle(); ?></h2>
 <p><?= $post->getContent(); ?></p>
+<img src="<?php echo $post->getPostImage(); ?>" alt="No Image">
 
 <form action="deletePost" method="post">
-    <input type="hidden" name="target_post_id" value="<?= $post->getAuthorId(); ?>">
+    <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
     <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+</form>
+
+<form action="/editPost" method="post">
+    <input type="hidden" name="target_post_id" value="<?= $post->getId(); ?>">
+    <input name="edit" type="submit" value="edit">
 </form>
 
 <?php

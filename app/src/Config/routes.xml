@@ -17,6 +17,9 @@
     <route path="createpost" action="CreatePost" controller="PostController"/>
     <route path="deletepost" action="DeletePost" controller="PostController"/>
 
+    <route path="editpost" action="EditPost" controller="PostController"/>
+    <route path="editpostconfirm" action="EditPostConfirm" controller="PostController"/>
+
     <!-- Comment -->
     <route path="article" action="comment" controller="CommentController" params="id"/>
     <route path="createcomment" action="CreateComment" controller="CommentController"/>

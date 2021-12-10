@@ -22,7 +22,7 @@ class ApiController extends BaseController
     {
         $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
         $authors = $authorManager->getAllAuthor();
-        echo(json_encode($authors));
+        echo(json_encode($authors, JSON_FORCE_OBJECT));
     }
 
     public function executeGetPostApi()
