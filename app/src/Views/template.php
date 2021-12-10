@@ -30,6 +30,7 @@
                     <li><a href="/author" class="nav-link px-2 text-white">User</a></li>
                 <?php } ?>
                 <li><a href="#" class="nav-link px-2 text-white">Api</a></li>
+                <li><a href="/api" class="nav-link px-2 text-white">Api</a></li>
             </ul>
             <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
                 <a href="setting" type="button" class="link px-2 text-white">Setting</a>

@@ -21,6 +21,11 @@
     <route path="article" action="comment" controller="CommentController" params="id"/>
     <route path="createcomment" action="CreateComment" controller="CommentController"/>
 
+    <!-- Api -->
+    <route path="api" action="api" controller="ApiController"/>
+    <route path="getpostapi" action="GetPostApi" controller="ApiController"/>
+    <route path="getuserapi" action="GetUserApi" controller="ApiController"/>
+
     <!-- LOGIN-->
     <route path="login" action="Login" controller="LoginController"/>
     <route path="sendlogin" action="SendLogin" controller="LoginController"/>
