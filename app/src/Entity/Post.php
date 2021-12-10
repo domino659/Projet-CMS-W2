@@ -9,6 +9,7 @@ class Post
     private string $content;
     private \DateTime $postDate;
     private int $authorId;
+    private string $postImage;
 
     public function __construct(array $data){
         $this->hydrate($data);
@@ -101,5 +102,21 @@ class Post
     public function setAuthorId(int $authorId): void
     {
         $this->authorId = $authorId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostImage(): string
+    {
+        return $this->postImage;
+    }
+
+    /**
+     * @param int $authorId
+     */
+    public function setPostImage(string $postImage): void
+    {
+        $this->postImage = $postImage;
     }
 }
