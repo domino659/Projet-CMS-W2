@@ -11,10 +11,11 @@
     <!-- Post -->
     <route path="post" action="Post" controller="PostController"/>
     <route path="createpost" action="CreatePost" controller="PostController"/>
+    <route path="deletepost" action="DeletePost" controller="PostController"/>
 
     <!-- Comment -->
     <route path="article" action="comment" controller="CommentController" params="id"/>
-    <route path="CreateComment" action="CreateComment" controller="CommentController" params="id"/>
+    <route path="createcomment" action="CreateComment" controller="CommentController"/>
 
     <!-- LOGIN-->
     <route path="login" action="Login" controller="LoginController"/>
