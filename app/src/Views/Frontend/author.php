@@ -1,4 +1,4 @@
-<h1>Je suis la page auteur</h1>
+    <h1>Users</h1>
 
 <?php
 if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
@@ -22,8 +22,13 @@ foreach ($authors as $user) :
         <p><?= $user->getId(); ?></p>
         <p><?= $user->getEmail(); ?></p>
         <div>
-            <input type="checkbox" id="isAdmin" name="<?php echo $user->getId(); ?>" <?php echo $user->isAdmin() ? "checked" : ""; ?>>
-            <label for="isAdmin">Is Admin</label>
+            <form action="modifyuseradmin" method="post">
+                <input type="checkbox" id="isAdmin" name="<?php echo $user->getId(); ?>" <?php echo $user->isAdmin() ? "checked" : ""; ?>>
+                <label for="isAdmin">Is Admin</label>
+                <input type="hidden" name="target_user_id" value="<?= $user->getId(); ?>">
+                <input type="hidden" name="target_user_situation" value="<?= $user->isAdmin(); ?>">
+                <input name="update" type="submit" value="Update" onclick="return confirm('Are you sure?')">
+            </form>
         </div>
         <form action="deleteUser" method="post">
                 <input type="hidden" name="target_user_id" value="<?= $user->getId(); ?>">

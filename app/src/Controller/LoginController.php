@@ -8,6 +8,14 @@ use App\Fram\Utils\Flash;
 
 class LoginController extends BaseController
 {
+    public function executeLogin()
+    {
+        $this->render(
+            'Login.php',
+            [],
+            'Login'
+        );
+    }
 
     public function executeSendLogin()
     {
@@ -37,12 +45,6 @@ class LoginController extends BaseController
         unset($_SESSION['user_token']);
         header('Location: /');
     }
-        public function executeLogin()
-    {
-        $this->render(
-            'Login.php',
-            [],
-            'Login'
-        );
-    }
+
+
 }

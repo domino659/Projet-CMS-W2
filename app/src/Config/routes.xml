@@ -7,6 +7,10 @@
     <!-- Author -->
     <route path="author" action="author" controller="AuthorController"/>
     <route path="deleteuser" action="DeleteUser" controller="AuthorController"/>
+    <route path="modifyuseradmin" action="ModifyUserAdmin" controller="AuthorController"/>
+
+    <route path="setting" action="setting" controller="AuthorController"/>
+    <route path="modifyuser" action="ModifyUser" controller="AuthorController"/>
 
     <!-- Post -->
     <route path="post" action="Post" controller="PostController"/>

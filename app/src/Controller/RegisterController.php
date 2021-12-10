@@ -22,7 +22,7 @@ class RegisterController extends BaseController
         $username = htmlspecialchars($_POST['username']);
         $isAdmin = $_POST['isAdmin'];
         $password = $_POST['password'];
-        $verif_password = htmlspecialchars($_POST['verif_password']);
+        $verif_password = htmlspecialchars($_POST['verification_password']);
         $email = htmlspecialchars($_POST['email']);
 
         $hashpassword = password_hash ( $password , PASSWORD_DEFAULT);
@@ -36,7 +36,7 @@ class RegisterController extends BaseController
                 if ( $connexion->isUserUnique($email) == null )
                 {
                     $connexion->createAuthor($username, $isAdmin, $hashpassword, $email);
-                    $_SESSION['user_token'] = $connexion->constructToken($email, $password);
+                    $_SESSION['user_token'] = $connexion->constructToken($email);
                     header('Location: /');
                     exit;
                 }
