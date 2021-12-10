@@ -10,7 +10,6 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
 
 <h2><?= $post->getTitle(); ?></h2>
 <p><?= $post->getContent(); ?></p>
-<img src="<?php echo $post->getPostImage(); ?>" alt="No Image">
 
 <form action="deletePost" method="post">
     <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
@@ -22,8 +21,8 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
     <input name="edit" type="submit" value="edit">
 </form>
 
+<h1>Comments</h1>
 <?php
-
 foreach ($comments as $comment) :
     ?>
     <div>
@@ -34,11 +33,12 @@ foreach ($comments as $comment) :
 <?php endforeach; ?>
 
 <h1>Add comment</h1>
-<form action="createComment" method="post">
+<form action="/createComment" method="post">
     <div>
             <textarea id="content" name="content" rows="10" cols="50">
                 Type your new comment here...
             </textarea>
     </div>
+    <input type="hidden" name="id" value="<?= $post->getId(); ?>">
     <button>Create comment</button>
 </form>

@@ -23,12 +23,13 @@ class CommentManager extends BaseManager
 
     public function getAllCommentByPostId(int $id): array
     {
-        $requeteSql = "SELECT * FROM comment WHERE authorId = :id";
+        $requeteSql = "SELECT * FROM comment WHERE postId = :id";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
         $prepare->execute();
         $results = $prepare->fetchAll(\PDO::FETCH_ASSOC);
+
         $comments = [];
         foreach ($results as $comment) {
             $comments[] = new Comment($comment);
@@ -46,15 +47,16 @@ class CommentManager extends BaseManager
     }
 
     public function createComment($authorid, $postid, $content, $commentdate){
-        $requeteSql = "INSERT INTO comment (authorid, postid, content, commentdate) Values (:authorid, :postid, :content, :commentdate)";
+        $requeteSql = "INSERT INTO comment (authorId, postId, content, commentDate) Values (:authorId, :postId, :content, :commentDate)";
         $connexion = new PDOFactory();
+
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
-        $prepare->bindValue(':postid', $postid, \PDO::PARAM_STR);
+        $prepare->bindValue(':authorId', $authorid, \PDO::PARAM_INT);
+        $prepare->bindValue(':postId', $postid, \PDO::PARAM_STR);
         $prepare->bindValue(':content', $content, \PDO::PARAM_STR);
-        $prepare->bindValue(':commentdate', $commentdate, \PDO::PARAM_STR);
+        $prepare->bindValue(':commentDate', $commentdate, \PDO::PARAM_STR);
         $prepare->execute();
-        $prepare->execute;
+        return true;
     }
 
     // public function updateComment(Comment $comment)

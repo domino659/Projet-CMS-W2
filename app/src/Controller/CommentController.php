@@ -31,10 +31,10 @@ class CommentController extends BaseController
 
     public function executeCreateComment()
     {
-        $date = date('Y-m-d H:i:s');
+        $date = date('Y-m-d\TH:i:s');
         $content = $_POST['content'];
-        $postid = $_GET['id'];
-        $authorid = 1;
+        $postid = $_POST['id'];
+        $authorid = $_SESSION['user_token']['id'];
 
         if(!empty($content))
         {

@@ -21,14 +21,22 @@ class ApiController extends BaseController
     public function executeGetUserApi()
     {
         $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
-        $authors = $authorManager->getAllAuthor();
-        echo(json_encode($authors, JSON_FORCE_OBJECT));
+        $authorsList = $authorManager->getAllAuthor();
+        $authors = [];
+        foreach($authorsList as $author){
+            $authors[] = (array) $author;
+        }
+        echo(json_encode($authors));
     }
 
     public function executeGetPostApi()
     {
         $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPosts();
-        echo(json_encode($posts, JSON_FORCE_OBJECT));
+        $postsList = $postManager->getAllPosts();
+        $posts = [];
+        foreach($postsList as $post){
+            $posts[] = (array) $post;
+        }
+        echo(json_encode($posts));
     }
 }

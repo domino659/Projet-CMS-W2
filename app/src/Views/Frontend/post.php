@@ -17,9 +17,9 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
             Type you new post here...
         </textarea>
     </div>
-    <div>
+    <!-- <div>
         <label for="postImage">Choose an image</label>
         <input type="file" id="postImage" name="postImage" accept="image/png, image/jpeg">
-    </div>
+    </div> -->
     <button>Create Post</button>
 </form>
