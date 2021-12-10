@@ -54,6 +54,7 @@ class CommentManager extends BaseManager
         $insert->bindValue(':content', $content, \PDO::PARAM_STR);
         $insert->bindValue(':commentdate', $commentdate, \PDO::PARAM_STR);
         $insert->execute();
+        return true;
     }
 
     // public function updateComment(Comment $comment)

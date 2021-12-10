@@ -25,8 +25,8 @@ class CommentController extends BaseController
         );
     }
 
-    public function executeCreateComment(){
-
+    public function executeCreateComment()
+    {
         $date = date('Y-m-d H:i:s');
         $content = $_POST['content'];
         $postid = $_GET['id'];

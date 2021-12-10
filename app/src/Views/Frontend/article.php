@@ -2,11 +2,6 @@
 
 <?php
 
-/**
- * @var $user \App\Entity\Author
- * @var $posts \App\Entity\Articles[]
- */
-
 foreach ($comments as $comment) :
     ?>
     <div>
@@ -19,7 +14,7 @@ foreach ($comments as $comment) :
 <form action="CreateComment" method="post">
     <div>
             <textarea id="content" name="content" rows="10" cols="50">
-                Type you new comment here...
+                Type your new comment here...
             </textarea>
     </div>
     <button>Create comment</button>
