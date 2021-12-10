@@ -37,7 +37,11 @@ class AuthorManager extends BaseManager
         return $prepare;
     }
 
-    //CREATE AUTHOR
+    /**
+     * @param Post $post
+     * @return Post|bool
+     */
+
     public function createAuthor($username, $isAdmin, $password, $email)
     {
         $requeteSql = "INSERT INTO author (username, isAdmin, password, email) Values (:username, :isAdmin, :password, :email)";
@@ -50,6 +54,11 @@ class AuthorManager extends BaseManager
         $prepare->execute();
         return true;
     }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
 
     public function deleteAuthorById(int $id): bool
     {

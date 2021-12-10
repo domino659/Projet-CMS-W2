@@ -11,12 +11,12 @@ class CommentManager extends BaseManager
     {
         $requeteSql = "SELECT * FROM comment";
         $connexion = new PDOFactory();
-        $prep = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prep->execute();
-        $results = $prep->fetchAll(\PDO::FETCH_ASSOC);
-        $posts = [];
-        foreach ($results as $result) {
-            $comments[] = new Comment($result);
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->execute();
+        $results = $prepare->fetchAll(\PDO::FETCH_ASSOC);
+        $comments = [];
+        foreach ($results as $comment) {
+            $comments[] = new Comment($comment);
         }
         return $comments;
     }
@@ -25,13 +25,13 @@ class CommentManager extends BaseManager
     {
         $requeteSql = "SELECT * FROM comment WHERE authorId = :id";
         $connexion = new PDOFactory();
-        $prep = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prep->bindValue(':id', $id, \PDO::PARAM_INT);
-        $prep->execute();
-        $results = $prep->fetchAll(\PDO::FETCH_ASSOC);
-        $posts = [];
-        foreach ($results as $result) {
-            $comments[] = new Comment($result);
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->execute();
+        $results = $prepare->fetchAll(\PDO::FETCH_ASSOC);
+        $comments = [];
+        foreach ($results as $comment) {
+            $comments[] = new Comment($comment);
         }
         return $comments;
     }
@@ -39,22 +39,22 @@ class CommentManager extends BaseManager
     public function getCommentById(){
         $requeteSql = "SELECT * FROM comment WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
-        $comment->execute();
-        return $comment;
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->execute();
+        return $prepare;
     }
 
     public function createComment($authorid, $postid, $content, $commentdate){
         $requeteSql = "INSERT INTO comment (authorid, postid, content, commentdate) Values (:authorid, :postid, :content, :commentdate)";
         $connexion = new PDOFactory();
-        $insert = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $insert->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
-        $insert->bindValue(':postid', $postid, \PDO::PARAM_STR);
-        $insert->bindValue(':content', $content, \PDO::PARAM_STR);
-        $insert->bindValue(':commentdate', $commentdate, \PDO::PARAM_STR);
-        $insert->execute();
-        return true;
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
+        $prepare->bindValue(':postid', $postid, \PDO::PARAM_STR);
+        $prepare->bindValue(':content', $content, \PDO::PARAM_STR);
+        $prepare->bindValue(':commentdate', $commentdate, \PDO::PARAM_STR);
+        $prepare->execute();
+        $prepare->execute;
     }
 
     // public function updateComment(Comment $comment)
@@ -62,17 +62,20 @@ class CommentManager extends BaseManager
     //     $id = $post['id'];
     //     $content = $comment['content'];
     //     $requeteSql = "UPDATE comment SET :content WHERE :id";
-    //     $requeteSql->bindValue(':content', $_GET['content'], PDO::PARAM_STR);
-    //     $requeteSql->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
-    //     $requetSql->execute;
     //     $connexion = new PDOFactory();
-    //     return $connexion->request($requeteSql);
+    //     $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+    //     $prepare->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+    //     $prepare->execute;
+    //     $prepare->execute;
     // }
 
-    // public function deleteComment()
+    // public function deleteComment($id)
     // {
     //     $requeteSql = "DELETE FROM comment WHERE id = $id";
     //     $connexion = new PDOFactory();
-    //     return $connexion->request($requeteSql);
+    //     $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+    //     $prepare->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+    //     $prepare->execute;
+    //     $prepare->execute;
     // }
 }

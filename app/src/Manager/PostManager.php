@@ -16,12 +16,12 @@ class PostManager extends BaseManager
     {
         $requeteSql = "SELECT * FROM post";
         $connexion = new PDOFactory();
-        $prep = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prep->execute();
-        $results = $prep->fetchAll(\PDO::FETCH_ASSOC);
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->execute();
+        $results = $prepare->fetchAll(\PDO::FETCH_ASSOC);
         $posts = [];
-        foreach ($results as $result) {
-            $posts[] = new Post($result);
+        foreach ($results as $post) {
+            $posts[] = new Post($post);
         }
         return $posts;
     }
@@ -30,10 +30,10 @@ class PostManager extends BaseManager
     {
         $requeteSql = "SELECT * FROM post WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
-        $comment->execute();
-        return $comment;
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->execute();
+        return $prepare;
     }
 
     /**
@@ -45,12 +45,12 @@ class PostManager extends BaseManager
     {
         $requeteSql = "INSERT INTO post (authorid, title, content, postdate) Values (:authorid, :title, :content, :postdate)";
         $connexion = new PDOFactory();
-        $insert = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $insert->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
-        $insert->bindValue(':title', $title, \PDO::PARAM_STR);
-        $insert->bindValue(':content', $content, \PDO::PARAM_STR);
-        $insert->bindValue(':postdate', $date, \PDO::PARAM_STR);
-        $insert->execute();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
+        $prepare->bindValue(':title', $title, \PDO::PARAM_STR);
+        $prepare->bindValue(':content', $content, \PDO::PARAM_STR);
+        $prepare->bindValue(':postdate', $date, \PDO::PARAM_STR);
+        $prepare->execute();
         return true;
     }
     /**
@@ -62,14 +62,13 @@ class PostManager extends BaseManager
     {
         $requeteSql = "UPDATE post SET content = :content, title = :title WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $comment->bindValue(':id', $post['id'], \PDO::PARAM_INT);
-        $comment->bindValue(':content', $post['content'], \PDO::PARAM_STR);
-        $comment->bindValue(':title', $post['post'], \PDO::PARAM_STR);
-        $comment->execute();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $post['id'], \PDO::PARAM_INT);
+        $prepare->bindValue(':content', $post['content'], \PDO::PARAM_STR);
+        $prepare->bindValue(':title', $post['post'], \PDO::PARAM_STR);
+        $prepare->execute();
         return true;
     }
-
 
     /**
      * @param int $id
@@ -80,9 +79,9 @@ class PostManager extends BaseManager
     {
         $requeteSql = "DELETE FROM post WHERE id = :id";
         $connexion = new PDOFactory();
-        $comment = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $comment->bindValue(':id', $id, \PDO::PARAM_INT);
-        $comment->execute();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->execute();
         return true;
     }
 }
