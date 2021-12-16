@@ -32,21 +32,22 @@ class CommentController extends BaseController
 
     public function executeCreateComment()
     {
+        $authorid = $_SESSION['user_token']['id'];
         $date = date('Y-m-d\TH:i:s');
         $content = $_POST['content'];
         $postid = $_POST['id'];
-        $authorid = $_SESSION['user_token']['id'];
 
         if(!empty($content))
         {
             $connexion = new CommentManager(PDOFactory::getMysqlConnection());
             $connexion->createComment($authorid, $postid, $content, $date);
-            header('Location: /');
+            header("Location: /article/".$postid);
         }
     }
 
     public function executeDeleteComment()
     {
+        $postid = $_POST['id'];
         $current_user_id = $_SESSION['user_token']['id'];
         $target_comment_id = $_POST['target_comment_id'];
         $target_author_id = $_POST['target_author_id'];
@@ -68,6 +69,6 @@ class CommentController extends BaseController
         else {
             Flash::setFlash('alert', "Leave that token alone.");
         }
-        header('Location: /');
+        header("Location: /article/".$postid);
     }
 }

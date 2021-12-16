@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Fram\Factories\PDOFactory;
+use App\Manager\AuthorManager;
+
 class Author
 {
     private int $id;

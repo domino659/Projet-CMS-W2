@@ -27,14 +27,15 @@ class AuthorManager extends BaseManager
     }
 
     //GET AUTHOR BY ID
-    public function getAuthorById(int $id): Author
+    public function getAuthorById($id)
     {
         $requeteSql = "SELECT * FROM author WHERE id = :id";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
         $prepare->execute();
-        return $prepare;
+        $result = $prepare->fetch(\PDO::FETCH_ASSOC);
+        return $result;
     }
 
     /**

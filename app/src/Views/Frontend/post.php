@@ -13,9 +13,7 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
         <input id="title" name="title">
     </div>
     <div>
-        <textarea id="content" name="content" rows="10" cols="50">
-            Type you new post here...
-        </textarea>
+        <textarea id="content" name="content" rows="3" cols="50"></textarea>
     </div>
     <div>
         <label for="postImage">Choose an image</label>
