@@ -24,11 +24,10 @@ class LoginController extends BaseController
 
         if ( isset($email) && isset($password) && $email != NULL && $password != NULL)
         {
-            $connexion = new AuthorManager(PDOFactory::getMysqlConnection());
-            $hashpassword = $connexion->userLogin($email);
+            $hashpassword = AuthorManager::userLogin($email);
             if ( password_verify($password, $hashpassword['password']) )
             {
-                $_SESSION['user_token'] = $connexion->constructToken($email);
+                $_SESSION['user_token'] = AuthorManager::constructToken($email);
                 header('Location: /');
             } else {
                 Flash::setFlash('alert', "The mail or the password you’ve entered is incorrect");

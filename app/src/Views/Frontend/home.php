@@ -1,3 +1,4 @@
+<?php error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE); ?>
 <h1>Home Page</h1>
 
 <?php
@@ -14,11 +15,22 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
  * @var $posts \App\Entity\Post[]
  */
 
-foreach ($posts as $article) :
+foreach ($posts as $post) :
+    ?>
+    <?php
+    $id = $post->getAuthorId();
+    $author = $post->getAuthor($id);
     ?>
     <div>
-        <h2><?= $article->getTitle(); ?></h2>
-        <p><?= substr($article->getContent(), 0, 200); ?></p>
-        <a href="/article/<?= $article->getId(); ?>">Lire plus</a>
+        <h3><?= $post->getTitle(); ?></h3>
+        <?php if ($author['username'] == true ) { ?>
+            <p>by <?= $author['username'] ?></p><?php
+        }
+        else {
+            ?><p>Deleted User</p>
+        <?php } ?>
+        <p><?= substr($post->getContent(), 0, 200); ?></p>
+        <a href="/article/<?= $post->getId(); ?>">Read more</a>
     </div>
+    <br>
 <?php endforeach; ?>

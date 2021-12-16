@@ -20,8 +20,7 @@ class ApiController extends BaseController
 
     public function executeGetUserApi()
     {
-        $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
-        $authorsList = $authorManager->getAllAuthor();
+        $authorsList = AuthorManager::getAllAuthor();
         $authors = [];
         foreach($authorsList as $author){
             $authors[] = (array) $author;
