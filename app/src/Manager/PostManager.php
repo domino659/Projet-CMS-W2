@@ -12,7 +12,7 @@ class PostManager extends BaseManager
      * @return Post[]
      */
 
-    public function getAllPosts(): array
+    public static function getAllPosts(): array
     {
         $requeteSql = "SELECT * FROM post";
         $connexion = new PDOFactory();
@@ -26,7 +26,7 @@ class PostManager extends BaseManager
         return $posts;
     }
 
-    public function getPostById(int $id): Post
+    public static function getPostById(int $id): Post
     {
         $requeteSql = "SELECT * FROM post WHERE id = :id";
         $connexion = new PDOFactory();
@@ -42,7 +42,7 @@ class PostManager extends BaseManager
      * @return Post|bool
      */
 
-    public function createPost($authorid, $title, $content, $date)
+    public static function createPost($authorid, $title, $content, $date)
     {
         $requeteSql = "INSERT INTO post (authorid, title, content, postdate) Values (:authorid, :title, :content, :postdate)";
         $connexion = new PDOFactory();
@@ -59,7 +59,7 @@ class PostManager extends BaseManager
      * @return Post|bool
      */
 
-    public function updatePost($id, $title, $content)
+    public static function updatePost($id, $title, $content)
     {
         $requeteSql = "UPDATE post SET title = :title, content = :content WHERE id = :id";
         $connexion = new PDOFactory();
@@ -76,7 +76,7 @@ class PostManager extends BaseManager
      * @return bool
      */
 
-    public function deletePostById(int $id): bool
+    public static function deletePostById(int $id): bool
     {
         $requeteSql = "DELETE FROM post WHERE id = :id";
         $connexion = new PDOFactory();

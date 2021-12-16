@@ -32,7 +32,7 @@
                 <li><a href="/api" class="nav-link px-2 text-white">Api</a></li>
             </ul>
             <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
-                <a href="setting" type="button" class="link px-2 text-white">Setting</a>
+                <a href="/setting" type="button" class="link px-2 text-white">Setting</a>
             <?php } ?>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                 <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">

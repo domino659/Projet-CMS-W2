@@ -30,8 +30,7 @@ class ApiController extends BaseController
 
     public function executeGetPostApi()
     {
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $postsList = $postManager->getAllPosts();
+        $postsList = PostManager::getAllPosts();
         $posts = [];
         foreach($postsList as $post){
             $posts[] = (array) $post;

@@ -15,8 +15,7 @@ class PostController extends BaseController
      */
     public function executeIndex()
     {
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPosts();
+        $posts = PostManager::getAllPosts();
 
         $this->render(
             'home.php',
@@ -39,8 +38,7 @@ class PostController extends BaseController
     public function executeEditPost()
     {
         $postid = $_POST['target_post_id'];
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $post = $postManager->getPostById($postid);
+        $post = PostManager::getPostById($postid);
 
         $this->render(
             'editpost.php',
@@ -60,8 +58,7 @@ class PostController extends BaseController
 
         if(!empty($title) && !empty($content))
         {
-            $connexion = new PostManager(PDOFactory::getMysqlConnection());
-            $connexion->createPost($authorid, $title, $content, $date);
+            PostManager::createPost($authorid, $title, $content, $date);
             header('Location: /');
         }
         else 
@@ -82,8 +79,7 @@ class PostController extends BaseController
 //            Flash::setFlash('alert', "You played fair.");
             if ($current_user_id == $target_author_id OR $_SESSION['user_token']['isAdmin'] == 1)
             {
-                $connexion = new PostManager(PDOFactory::getMysqlConnection());
-                $connexion->deletePostById($target_author_id);
+                PostManager::deletePostById($target_author_id);
                 Flash::setFlash('alert', "Delete Successful.");
             }
             else {
@@ -109,14 +105,13 @@ class PostController extends BaseController
 //            Flash::setFlash('alert', "You played fair
             if ($current_user_id == $target_author_id OR $_SESSION['user_token']['isAdmin'] == 1)
             {
-                $connexion = new PostManager(PDOFactory::getMysqlConnection());
-                $connexion->updatePost($postid, $title, $content);
+                PostManager::updatePost($postid, $title, $content);
                 Flash::setFlash('alert', "Edit Successful.");
             }
             else {
                 Flash::setFlash('alert', "This is not your post you can't edit it");
             }
         }
-        header('Location: /');
+        header("Location: /article/".$postid);
     }
 }

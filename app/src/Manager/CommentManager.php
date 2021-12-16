@@ -7,21 +7,7 @@ use App\Fram\Factories\PDOFactory;
 
 class CommentManager extends BaseManager
 {
-    public function getAllComment(): array
-    {
-        $requeteSql = "SELECT * FROM comment";
-        $connexion = new PDOFactory();
-        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->execute();
-        $results = $prepare->fetchAll(\PDO::FETCH_ASSOC);
-        $comments = [];
-        foreach ($results as $comment) {
-            $comments[] = new Comment($comment);
-        }
-        return $comments;
-    }
-
-    public function getAllCommentByPostId(int $id): array
+    public static function getAllCommentByPostId(int $id): array
     {
         $requeteSql = "SELECT * FROM comment WHERE postId = :id";
         $connexion = new PDOFactory();
@@ -37,16 +23,7 @@ class CommentManager extends BaseManager
         return $comments;
     }
 
-    public function getCommentById(){
-        $requeteSql = "SELECT * FROM comment WHERE id = :id";
-        $connexion = new PDOFactory();
-        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
-        $prepare->execute();
-        return $prepare;
-    }
-
-    public function createComment($authorid, $postid, $content, $commentdate){
+    public static function createComment($authorid, $postid, $content, $commentdate){
         $requeteSql = "INSERT INTO comment (authorId, postId, content, commentDate) Values (:authorId, :postId, :content, :commentDate)";
         $connexion = new PDOFactory();
 
@@ -59,7 +36,7 @@ class CommentManager extends BaseManager
         return true;
     }
 
-    public function deleteComment($id)
+    public static function deleteComment($id)
     {
         $requeteSql = "DELETE FROM comment WHERE id = :id";
         $connexion = new PDOFactory();

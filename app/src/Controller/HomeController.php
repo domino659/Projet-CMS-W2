@@ -10,11 +10,8 @@ class HomeController extends BaseController{
 
     public function executeHome()
     {   
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPosts();
-
-        $userManager = new UserManager(PDOFactory::getMysqlConnection());
-
+        $posts = PostManager::getAllPosts();
+        
         $this->render(
             'home.php',
             [
