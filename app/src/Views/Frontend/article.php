@@ -1,4 +1,4 @@
-
+<?php error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE); ?>
 <h1>Article</h1>
 
 <?php
@@ -6,50 +6,61 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
     <div class="alert alert-danger" role="alert">
         <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
     </div>
-<?php endif; ?>
-
-<?php
-$id = $post->getAuthorId();
-$author = $post->getAuthor($id);
+<?php endif;
+$postAuthorId = $post->getAuthorId();
+$author = $post->getAuthor($postAuthorId);
 ?>
 
-<h2><?= $post->getTitle(); ?></h2>
-<p><?= $author['username'] ?></p>
-<p><?= $post->getContent(); ?></p>
-<?php
-
-?>
-
-
-<?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
-<form action="deletePost" method="post">
-    <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
-    <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-</form>
-
-<form action="/editPost" method="post">
-    <input type="hidden" name="target_post_id" value="<?= $post->getId(); ?>">
-    <input name="edit" type="submit" value="edit">
-</form>
+<h3><?= $post->getTitle(); ?></h3>
+<?php if ($author['username'] == true ) { ?>
+    <p>by <?= $author['username'] ?></p>
+    <p><?= $post->getContent(); ?></p>
+    <?php
+}
+else {
+    ?><p>Deleted User</p>
 <?php } ?>
 
-<h2>Comments</h2>
+<?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) {
+    if ($_SESSION['user_token']['id'] == $postAuthorId OR $_SESSION['user_token']['isAdmin'] == true ){ ?>
+    <form action="deletePost" method="post">
+        <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
+        <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+    </form>
+
+    <form action="editPost" method="post">
+        <input type="hidden" name="target_post_id" value="<?= $post->getId(); ?>">
+        <input name="edit" type="submit" value="edit">
+    </form>
+    <?php }
+} ?>
+
+<h4>Comments</h4>
 <?php
 foreach ($comments as $comment) :
-    $id = $comment->getAuthorId();
-    $author = $comment->getAuthor($id);
+    $postCommentId = $comment->getAuthorId();
+    $author = $comment->getAuthor($postCommentId);
     ?>
     <div>
         <p><?= $comment->getContent(); ?></p>
-        <p><?= $author['username'] ?></p>
+        <?php if ($author['username'] == true ) { ?>
+            <p>by <?= $author['username'] ?></p>
+            <?php
+        }
+        else {
+            ?><p>Deleted User</p>
+        <?php } ?>
     </div>
-    <form action="/deleteComment" method="post">
+<?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) {
+    if ($_SESSION['user_token']['id'] == $postAuthorId OR $_SESSION['user_token']['isAdmin'] == true ){ ?>
         <input type="hidden" name="id" value="<?= $post->getId(); ?>">
         <input type="hidden" name="target_comment_id" value="<?= $comment->getId(); ?>">
         <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
         <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
     </form>
-
+    <?php }
+} ?>
+<br>
 <?php endforeach; ?>
 
 <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>

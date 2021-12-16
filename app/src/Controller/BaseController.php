@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Manager\AuthorManager;
+
 abstract class BaseController
 {
     private $templateFile = __DIR__ . './../Views/template.php';
@@ -32,6 +34,16 @@ abstract class BaseController
         $content = ob_get_clean();
         require $this->templateFile;
         exit;
+    }
 
+    public static function checkToken() {
+        $token = $_SESSION['user_token'];
+        $db_token = AuthorManager::tokenVerification($_SESSION['user_token']['id'], $_SESSION['user_token']['username'], $_SESSION['user_token']['isAdmin'], $_SESSION['user_token']['email']);
+        if ($token == $db_token) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

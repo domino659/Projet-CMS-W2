@@ -52,10 +52,8 @@ class CommentController extends BaseController
         $target_comment_id = $_POST['target_comment_id'];
         $target_author_id = $_POST['target_author_id'];
 
-        $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
-        $token = $_SESSION['user_token'];
-        $db_token = $authorManager->tokenVerification($_SESSION['user_token']['id'], $_SESSION['user_token']['username'], $_SESSION['user_token']['isAdmin'], $_SESSION['user_token']['email']);
-        if ($token == $db_token) {
+//        Check if the token was not modified
+        if (BaseController::checkToken() == true) {
             if ($current_user_id == $target_author_id OR $_SESSION['user_token']['isAdmin'] == 1)
             {
                 $connexion = new CommentManager(PDOFactory::getMysqlConnection());

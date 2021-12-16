@@ -125,7 +125,6 @@ class Post
 
     public function getAuthor($id)
     {
-        $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
-        return $authorManager->getAuthorById($id);
+        return AuthorManager::getAuthorById($id);
     }
 }

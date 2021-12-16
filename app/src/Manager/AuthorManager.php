@@ -12,7 +12,7 @@ class AuthorManager extends BaseManager
     /**
      * @return Author[]
      */
-    public function getAllAuthor(): array
+    public static function getAllAuthor(): array
     {
         $requeteSql = "SELECT * FROM author";
         $connexion = new PDOFactory();
@@ -27,7 +27,7 @@ class AuthorManager extends BaseManager
     }
 
     //GET AUTHOR BY ID
-    public function getAuthorById($id)
+    public static function getAuthorById($id)
     {
         $requeteSql = "SELECT * FROM author WHERE id = :id";
         $connexion = new PDOFactory();
@@ -43,7 +43,7 @@ class AuthorManager extends BaseManager
      * @return Post|bool
      */
 
-    public function createAuthor($username, $isAdmin, $password, $email)
+    public static function createAuthor($username, $isAdmin, $password, $email)
     {
         $requeteSql = "INSERT INTO author (username, isAdmin, password, email) Values (:username, :isAdmin, :password, :email)";
         $connexion = new PDOFactory();
@@ -56,7 +56,7 @@ class AuthorManager extends BaseManager
         return true;
     }
 
-    public function updateAuthor($id, $username, $email)
+    public static function updateAuthor($id, $username, $email)
     {
         $requeteSql = "UPDATE author SET username = :username, email = :email  WHERE id = :id";
         $connexion = new PDOFactory();
@@ -68,7 +68,7 @@ class AuthorManager extends BaseManager
         return true;
     }
 
-    public function updateAuthorPassword($id, $password)
+    public static function updateAuthorPassword($id, $password)
     {
         $requeteSql = "UPDATE author SET password = :password  WHERE id = :id";
         $connexion = new PDOFactory();
@@ -79,7 +79,7 @@ class AuthorManager extends BaseManager
         return true;
     }
 
-    public function updateAuthoridAdmin($id, $isAdmin)
+    public static function updateAuthoridAdmin($id, $isAdmin)
     {
         $requeteSql = "UPDATE author SET isAdmin = :isAdmin  WHERE id = :id";
         $connexion = new PDOFactory();
@@ -95,7 +95,7 @@ class AuthorManager extends BaseManager
      * @return bool
      */
 
-    public function deleteAuthorById(int $id): bool
+    public static function deleteAuthorById(int $id): bool
     {
         $requeteSql = "DELETE FROM author WHERE id = :id";
         $connexion = new PDOFactory();
@@ -106,7 +106,7 @@ class AuthorManager extends BaseManager
     }
 
     //VERIFY IF USER EXIST
-    public function userLogin($email)
+    public static function userLogin($email)
     {
         $requeteSql = "SELECT password FROM author WHERE email = :email";
         $connexion = new PDOFactory();
@@ -117,7 +117,7 @@ class AuthorManager extends BaseManager
     }
 
     //VERIFY IS USER UNIQUE
-    public function isUserUnique($email)
+    public static function isUserUnique($email)
     {
         $requeteSql = "SELECT email FROM author WHERE email = :email";
         $connexion = new PDOFactory();
@@ -128,7 +128,7 @@ class AuthorManager extends BaseManager
     }
 
     //CONSTRUCT TOKEN
-    public function constructToken($email)
+    public static function constructToken($email)
     {
         $requeteSql = "SELECT id, username, isAdmin, email FROM author WHERE email = :email";
         $connexion = new PDOFactory();
@@ -139,7 +139,7 @@ class AuthorManager extends BaseManager
     }
 
     //VERIFY TOKEN
-    public function tokenVerification($id, $username, $isAdmin, $email)
+    public static function tokenVerification($id, $username, $isAdmin, $email)
     {
         $requeteSql = "SELECT id, username, isAdmin, email FROM author WHERE id = :id AND username = :username AND isAdmin = :isAdmin AND email = :email";
         $connexion = new PDOFactory();

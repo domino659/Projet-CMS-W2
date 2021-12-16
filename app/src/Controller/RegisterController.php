@@ -32,11 +32,10 @@ class RegisterController extends BaseController
         {
             if ( $password == $verif_password )
             {
-                $connexion = new AuthorManager(PDOFactory::getMysqlConnection());
-                if ( $connexion->isUserUnique($email) == null )
+                if ( AuthorManager::isUserUnique($email) == null )
                 {
-                    $connexion->createAuthor($username, $isAdmin, $hashpassword, $email);
-                    $_SESSION['user_token'] = $connexion->constructToken($email);
+                    AuthorManager::createAuthor($username, $isAdmin, $hashpassword, $email);
+                    $_SESSION['user_token'] = AuthorManager::constructToken($email);
                     header('Location: /');
                     exit;
                 }
