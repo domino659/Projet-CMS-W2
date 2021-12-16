@@ -59,14 +59,14 @@ class PostManager extends BaseManager
      * @return Post|bool
      */
 
-    public function updatePost(Post $post)
+    public function updatePost($id, $title, $content)
     {
-        $requeteSql = "UPDATE post SET content = :content, title = :title WHERE id = :id";
+        $requeteSql = "UPDATE post SET title = :title, content = :content WHERE id = :id";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindValue(':id', $post['id'], \PDO::PARAM_INT);
-        $prepare->bindValue(':content', $post['content'], \PDO::PARAM_STR);
-        $prepare->bindValue(':title', $post['post'], \PDO::PARAM_STR);
+        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prepare->bindValue(':title', $title, \PDO::PARAM_STR);
+        $prepare->bindValue(':content', $content, \PDO::PARAM_STR);
         $prepare->execute();
         return true;
     }

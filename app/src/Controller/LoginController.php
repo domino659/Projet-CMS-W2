@@ -45,6 +45,4 @@ class LoginController extends BaseController
         unset($_SESSION['user_token']);
         header('Location: /');
     }
-
-
 }

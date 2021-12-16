@@ -13,7 +13,7 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
         <input id="title" name="title">
     </div>
     <div>
-        <textarea id="content" name="content" rows="10" cols="50">
+        <textarea id="content" name="content" rows="3" cols="50">
             <?php echo $post->getContent(); ?>
         </textarea>
     </div>

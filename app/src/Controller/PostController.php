@@ -53,15 +53,15 @@ class PostController extends BaseController
 
     public function executeCreatePost()
     {
+        $authorid = $_SESSION['user_token']['id'];
         $title = $_POST['title'];
         $content = $_POST['content'];
-        $userid = 1;
         $date = date('Y-m-d H:i:s');
 
         if(!empty($title) && !empty($content))
         {
             $connexion = new PostManager(PDOFactory::getMysqlConnection());
-            $connexion->createPost($userid, $title, $content, $date);
+            $connexion->createPost($authorid, $title, $content, $date);
             header('Location: /');
         }
         else 

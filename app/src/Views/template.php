@@ -41,11 +41,11 @@
             <div class="text-end">
                 <!-- IF USER CONNECTED -->
                 <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) { ?>
-                    <a href="logout" type="button" class="btn btn-outline-light me-2">Logout</a>
+                    <a href="/logout" type="button" class="btn btn-outline-light me-2">Logout</a>
                 <?php } else { ?>
-                    <!-- IF USER NOT CONNECTED -->
-                    <a href="login" type="button" class="btn btn-outline-light me-2">Login</a>
-                    <a href="register" type="button" class="btn btn-warning">Sign-in</a>
+                <!-- IF USER NOT CONNECTED -->
+                    <a href="/login" type="button" class="btn btn-outline-light me-2">Login</a>
+                    <a href="/register" type="button" class="btn btn-warning">Sign-in</a>
                 <?php } ?>
             </div>
         </div>

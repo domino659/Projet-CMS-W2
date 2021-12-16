@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Fram\Factories\PDOFactory;
+use App\Manager\AuthorManager;
+
 class Post
 {
     private int $id;
@@ -118,5 +121,11 @@ class Post
     public function setPostImage(string $postImage): void
     {
         $this->postImage = $postImage;
+    }
+
+    public function getAuthor($id)
+    {
+        $authorManager = new AuthorManager(PDOFactory::getMysqlConnection());
+        return $authorManager->getAuthorById($id);
     }
 }
