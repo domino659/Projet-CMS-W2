@@ -42,7 +42,7 @@ VALUES ('Premier Post', 'Lorem ipsum', NOW(), 1);
 INSERT INTO ProjetCMSW2.post (title, content, postDate, authorId)
 VALUES ('Deuxieme Post', 'Lorem ipsum  tadaaa', NOW(), 2);
 
-INSERT INTO ProjetCMSW2.comment (content, commentDdate, authorId, postId)
+INSERT INTO ProjetCMSW2.comment (content, commentDate, authorId, postId)
 VALUES ('zib zab zoub zoubida', NOW(), 1, 1);
 
 INSERT INTO ProjetCMSW2.comment (content, commentDate, authorId, postId)

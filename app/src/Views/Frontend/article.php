@@ -23,15 +23,14 @@ else {
 
 <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) {
     if ($_SESSION['user_token']['id'] == $postAuthorId OR $_SESSION['user_token']['isAdmin'] == true ){ ?>
-    <form action="deletePost" method="post">
-        <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
-        <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-    </form>
-
-    <form action="editPost" method="post">
-        <input type="hidden" name="target_post_id" value="<?= $post->getId(); ?>">
-        <input name="edit" type="submit" value="edit">
-    </form>
+        <form action="/editPost" method="post">
+            <input type="hidden" name="target_post_id" value="<?= $post->getId(); ?>">
+            <input name="edit" type="submit" value="Edit">
+        </form>
+        <form action="/deletePost" method="post">
+            <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
+            <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+        </form>
     <?php }
 } ?>
 
@@ -53,10 +52,13 @@ foreach ($comments as $comment) :
     </div>
 <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) {
     if ($_SESSION['user_token']['id'] == $postAuthorId OR $_SESSION['user_token']['isAdmin'] == true ){ ?>
-        <input type="hidden" name="id" value="<?= $post->getId(); ?>">
-        <input type="hidden" name="target_comment_id" value="<?= $comment->getId(); ?>">
-        <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
-        <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+        <form action="/deletecomment" method="post">
+            <input type="hidden" name="id" value="<?= $post->getId(); ?>">
+            <input type="hidden" name="target_comment_id" value="<?= $comment->getId(); ?>">
+            <input type="hidden" name="target_author_id" value="<?= $post->getAuthorId(); ?>">
+            <input type="hidden" name="target_post_id" value="<?= $post->getId(); ?>">
+            <input name="delete" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+        </form>
     </form>
     <?php }
 } ?>

@@ -15,10 +15,9 @@ class CommentController extends BaseController
     public function executeComment()
     {
         $postId = $_GET['id'];
-        $commentManager = new CommentManager(PDOFactory::getMysqlConnection());
-        $comments = $commentManager->getAllCommentByPostId($postId);
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $post = $postManager->getPostById($postId);
+
+        $comments = CommentManager::getAllCommentByPostId($postId);
+        $post = PostManager::getPostById($postId);
 
         $this->render(
             'article.php',
@@ -39,10 +38,12 @@ class CommentController extends BaseController
 
         if(!empty($content))
         {
-            $connexion = new CommentManager(PDOFactory::getMysqlConnection());
-            $connexion->createComment($authorid, $postid, $content, $date);
-            header("Location: /article/".$postid);
+            CommentManager::createComment($authorid, $postid, $content, $date);
         }
+        else {
+            Flash::setFlash('alert', "Please enter some text.");
+        }
+        header("Location: /article/".$postid);
     }
 
     public function executeDeleteComment()
@@ -56,8 +57,7 @@ class CommentController extends BaseController
         if (BaseController::checkToken() == true) {
             if ($current_user_id == $target_author_id OR $_SESSION['user_token']['isAdmin'] == 1)
             {
-                $connexion = new CommentManager(PDOFactory::getMysqlConnection());
-                $connexion->deleteComment($target_comment_id);
+                CommentManager::deleteComment($target_comment_id);
                 Flash::setFlash('alert', "Delete Successful.");
             }
             else {

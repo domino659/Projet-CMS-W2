@@ -10,12 +10,10 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
 <form action="EditPostConfirm" method="post">
     <div>
         <label for="title">Title</label>
-        <input id="title" name="title">
+        <input type="text" id="title" name="title" template="<?= $post->getTitle() ?>" value="<?= $post->getTitle() ?>">
     </div>
     <div>
-        <textarea id="content" name="content" rows="3" cols="50">
-            <?php echo $post->getContent(); ?>
-        </textarea>
+        <textarea type="text" id="content" name="content" rows="3" cols="50"><?= $post->getContent() ?></textarea>
     </div>
     <div>
         <label for="postImage">Choose an image</label>
