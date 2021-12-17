@@ -13,6 +13,6 @@ Ce projet est un CMS (Content Management System) basique.
 ■ Une date de publication
 
 Il n'as pour l'instant aucun élément graphique. Vous pouvez commancer en vous loggant.
-Afin d'alléger le projet aucune image n'est incluse dans le projet, livbe a vous d'en importer.
+Afin d'alléger le projet aucune image n'est incluse dans le projet, libre a vous d'en importer.
 
 Pour lancer le projet, il faut lancer le fichier docker avec la commande: docker-compose up -d.
