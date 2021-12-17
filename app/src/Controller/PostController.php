@@ -51,17 +51,28 @@ class PostController extends BaseController
 
     public function executeCreatePost()
     {
+        $postImageName = NULL;
         $authorid = $_SESSION['user_token']['id'];
         $title = $_POST['title'];
         $content = $_POST['content'];
         $date = date('Y-m-d H:i:s');
-        $postimage = $_FILES['image']['tmp_name'];
-        if (isset($postimage) && $postimage != NULL) {
-            $postimage = file_get_contents($_FILES['image']['tmp_name']);
+        $postImage = $_FILES['image']['name'];
+
+        if (isset($postImage) && $postImage != NULL) {
+            $tmpFile = $_FILES['image']['tmp_name'];
+            $newFile = 'public/images/'.$_FILES['image']['name'];
+            $result = move_uploaded_file($tmpFile, $newFile);
+            if ($result) {
+                $postImageName = $_FILES['image']['name'];
+                Flash::setFlash('alert', "Image uploaded.");
+            } else {
+                Flash::setFlash('alert', "Image Failed to upload.");
+            }
         }
         if(!empty($title) && !empty($content))
         {
-            PostManager::createPost($authorid, $title, $content, $date, $postimage);
+            PostManager::createPost($authorid, $title, $content, $date, $postImageName);
+            Flash::setFlash('alert', "You're post was uploaded.");
             header('Location: /');
         }
         else 
@@ -75,14 +86,15 @@ class PostController extends BaseController
     {
         $current_user_id = $_SESSION['user_token']['id'];
         $target_author_id = $_POST['target_author_id'];
+        $target_post_id = $_POST['target_post_id'];
 
 //        Check if the token was not modified
         if (BaseController::checkToken() == true) {
 //            Flash::setFlash('alert', "You played fair.");
             if ($current_user_id == $target_author_id OR $_SESSION['user_token']['isAdmin'] == 1)
             {
-                PostManager::deletePostById($target_author_id);
-                Flash::setFlash('alert', "Delete Successful.");
+                PostManager::deletePostById($target_post_id);
+                Flash::setFlash('alert', "<Delete Successful.>");
             }
             else {
                 Flash::setFlash('alert', "This is not your post you can't delete it.");

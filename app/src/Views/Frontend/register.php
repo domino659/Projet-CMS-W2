@@ -4,6 +4,7 @@
         <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
     </div>
 <?php endif; ?>
+
 <form action="sendRegister" method="post">
     <div>
         <label for="username">Name :</label>

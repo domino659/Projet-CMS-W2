@@ -12,7 +12,7 @@ class Post
     private string $content;
     private \DateTime $postDate;
     private int $authorId;
-    private ?string $postImage;
+    private ?string $postImageName;
 
     public function __construct(array $data){
         $this->hydrate($data);
@@ -108,19 +108,19 @@ class Post
     }
 
     /**
-     * @return string|Null
+     * @return string|null
      */
-    public function getPostImage(): ?string
+    public function getPostImageName(): ?string
     {
-        return $this->postImage;
+        return $this->postImageName;
     }
 
     /**
-     * @param int $authorId
+     * @param string|null $postImageName
      */
-    public function setPostImage(?string $postImage): void
+    public function setPostImageName(?string $postImageName): void
     {
-        $this->postImage = $postImage;
+        $this->postImageName = $postImageName;
     }
 
     public function getAuthor($id)

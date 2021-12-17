@@ -1,7 +1,6 @@
 <h1>Edit post</h1>
 
-<?php
-if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
+<?php if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
     <div class="alert alert-danger" role="alert">
         <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
     </div>

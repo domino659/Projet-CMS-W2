@@ -1,4 +1,5 @@
 <h1>Update your informations</h1>
+
 <?php if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
     <div class="alert alert-danger" role="alert">
         <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
@@ -9,6 +10,7 @@
 $username = $_SESSION['user_token']['username'];
 $email = $_SESSION['user_token']['email'];
 ?>
+
 <form action="modifyuser" method="post">
     <div>
         <label for="username">Name :</label>

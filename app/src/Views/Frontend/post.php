@@ -1,7 +1,6 @@
 <h1>Create post</h1>
 
-<?php
-if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
+<?php if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
     <div class="alert alert-danger" role="alert">
         <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
     </div>
@@ -19,5 +18,5 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
         <label for="image">Choose an image file (JPEG, GIF ou PNG)</label>
         <input type="file" id="image" name="image"><br>
     </div>
-    <button>Create Post</button>
+<button>Create Post</button>
 </form>

@@ -4,6 +4,7 @@
         <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
     </div>
 <?php endif; ?>
+
 <form action="sendLogin" method="post">
     <div>
         <label for="email">E-mail :</label>

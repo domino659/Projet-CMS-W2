@@ -1,8 +1,7 @@
 <?php error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE); ?>
 <h1>Home Page</h1>
 
-<?php
-if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
+<?php if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
     <div class="alert alert-danger" role="alert">
         <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
     </div>
@@ -16,14 +15,13 @@ if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
  */
 
 foreach ($posts as $post) :
-    ?>
-    <?php
     $id = $post->getAuthorId();
     $author = $post->getAuthor($id);
     ?>
     <div>
         <h3><?= $post->getTitle(); ?></h3>
-        <?php if ($author['username'] == true ) { ?>
+        <?php if ($author['username'] == true )
+        { ?>
             <p>by <?= $author['username'] ?></p><?php
         }
         else {

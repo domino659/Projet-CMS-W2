@@ -27,8 +27,7 @@ abstract class BaseController
         foreach ($arguments as $key => $value) {
             ${$key} = $value;
         }
-
-
+        
         ob_start();
         require $view;
         $content = ob_get_clean();
