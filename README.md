@@ -1,6 +1,7 @@
 # Projet-CMS-W2
 
 Ce projet est un CMS (Content Management System) basique.
+
 ■ Il gére :
 – Des posts avec :
 ■ Titre
