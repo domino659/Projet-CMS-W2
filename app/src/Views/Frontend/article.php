@@ -14,12 +14,15 @@ $author = $post->getAuthor($postAuthorId);
 <h3><?= $post->getTitle(); ?></h3>
 <?php if ($author['username'] == true ) { ?>
     <p>by <?= $author['username'] ?></p>
-    <p><?= $post->getContent(); ?></p>
     <?php
 }
 else {
     ?><p>Deleted User</p>
 <?php } ?>
+<p><?= $post->getContent(); ?></p>
+<?php var_dump($post->getPostImage()); ?>
+    <img src="<?php $post->getPostImage() ?>" alt="">
+<!--<img src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';-->
 
 <?php if ( isset($_SESSION['user_token']) && $_SESSION['user_token'] == true) {
     if ($_SESSION['user_token']['id'] == $postAuthorId OR $_SESSION['user_token']['isAdmin'] == true ){ ?>

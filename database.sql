@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS ProjetCMSW2.post (
     content TEXT NOT NULL,
     postDate DATETIME NOT NULL,
     authorId INT UNSIGNED NOT NULL,
-    -- postImage TEXT NOT NULL,
+    postImage BLOB,
     PRIMARY KEY (id)
     );
 

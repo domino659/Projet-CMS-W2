@@ -42,15 +42,15 @@ class PostManager extends BaseManager
      * @return Post|bool
      */
 
-    public static function createPost($authorid, $title, $content, $date)
+    public static function createPost($authorid, $title, $content, $date, $postimage)
     {
-        $requeteSql = "INSERT INTO post (authorid, title, content, postdate) Values (:authorid, :title, :content, :postdate)";
-        $connexion = new PDOFactory();
+                                    $requeteSql = "INSERT INTO post (authorid, title, content, postdate, postimage) Values (:authorid, :title, :content, :postdate, :postimage)";        $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindValue(':authorid', $authorid, \PDO::PARAM_INT);
         $prepare->bindValue(':title', $title, \PDO::PARAM_STR);
         $prepare->bindValue(':content', $content, \PDO::PARAM_STR);
         $prepare->bindValue(':postdate', $date, \PDO::PARAM_STR);
+        $prepare->bindValue(':postimage', $postimage, \PDO::PARAM_STR);
         $prepare->execute();
         return true;
     }

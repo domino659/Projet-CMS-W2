@@ -55,10 +55,13 @@ class PostController extends BaseController
         $title = $_POST['title'];
         $content = $_POST['content'];
         $date = date('Y-m-d H:i:s');
-
+        $postimage = $_FILES['image']['tmp_name'];
+        if (isset($postimage) && $postimage != NULL) {
+            $postimage = file_get_contents($_FILES['image']['tmp_name']);
+        }
         if(!empty($title) && !empty($content))
         {
-            PostManager::createPost($authorid, $title, $content, $date);
+            PostManager::createPost($authorid, $title, $content, $date, $postimage);
             header('Location: /');
         }
         else 
@@ -75,7 +78,6 @@ class PostController extends BaseController
 
 //        Check if the token was not modified
         if (BaseController::checkToken() == true) {
-//            Flash::setFlash('alert', "You played fair
 //            Flash::setFlash('alert', "You played fair.");
             if ($current_user_id == $target_author_id OR $_SESSION['user_token']['isAdmin'] == 1)
             {
